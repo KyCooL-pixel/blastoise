@@ -20,3 +20,15 @@ This is an assignment made for the course TTTK2023 Object Oriented Software Engi
 2) Chuo Ngiu Bing
 3) Hwang Tian Ee
 4) Lee Jia Yee
+
+## Developer notes
+-
+### Installation
+Leave empty purposely
+
+## Users Run and Installation guide
+-
+### Installation
+-
+### Run
+-
