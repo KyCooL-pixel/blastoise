@@ -8,12 +8,19 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import com.blastoisefx.model.User;
 
 /**
  * JavaFX App
  */
 public class App extends Application {
+    // Logic part
+    // will leave the users list here first
+    private static ArrayList<User> users = new ArrayList<User>();
 
+    // UI
     private static Scene scene;
 
     @Override
@@ -35,6 +42,10 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch();
+    }
+
+    public static ArrayList<User> getUsers() {
+        return users;
     }
 
 }
