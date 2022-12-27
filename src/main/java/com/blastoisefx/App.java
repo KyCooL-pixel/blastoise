@@ -54,7 +54,7 @@ public class App extends Application {
             out.flush();
             // closing the stream
             out.close();
-            System.out.println("success");
+            System.out.println("Users' data saved successfully");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -70,7 +70,6 @@ public class App extends Application {
         } catch (Exception e) {
             System.out.println(e);
             System.out.println("Creating new database file for storing users");
-            File newUsertxt = new File("users.txt");
         }
     }
 
