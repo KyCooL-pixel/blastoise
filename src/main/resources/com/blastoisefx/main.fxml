@@ -6,7 +6,16 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blastoisefx.controller.RouteController">
+<BorderPane
+   maxHeight="-Infinity"
+   maxWidth="-Infinity"
+   minHeight="-Infinity"
+   minWidth="-Infinity"
+   prefHeight="400.0"
+   prefWidth="600.0"
+   xmlns="http://javafx.com/javafx/19"
+   xmlns:fx="http://javafx.com/fxml/1"
+   fx:controller="com.blastoisefx.controller.RouteController">
    <top>
       <Label text="Blastoise" BorderPane.alignment="CENTER">
          <font>
@@ -18,7 +27,8 @@
       <Label text="App that changes queueing,ever" BorderPane.alignment="CENTER" />
    </bottom>
    <center>
-      <ImageView fx:id="logo" fitHeight="263.0" fitWidth="261.0" onMouseClicked="#toLogin" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+      <ImageView fx:id="logo" fitHeight="263.0" fitWidth="261.0" onMouseClicked="#toLogin"
+         pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
          <image>
             <Image url="@Blastoise.gif" />
          </image>
