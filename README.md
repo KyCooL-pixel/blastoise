@@ -1,8 +1,12 @@
 # Blastoise
 This is an assignment made for the course TTTK2023 Object Oriented Software Engineering
+
 ## TODO
 1) research on css stylesheets for javafx
-2) research on serialization
+2) research on log4j (logger library)
+3) make the main screen logo transparent background
+
+
 
 ### Concept
 1) Users will first sign up with an account
