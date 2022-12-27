@@ -36,7 +36,7 @@
             <ToolBar prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-spacing: 10;">
               <items>
                 <Button fx:id="loginButton" mnemonicParsing="false" onMouseClicked="#Login" text="Login" translateX="70.0" />
-                  <Button fx:id="signUpButton" layoutX="10.0" layoutY="12.0" onMouseClicked="#SignUp" mnemonicParsing="false" text="Sign Up" translateX="70.0" />
+                  <Button fx:id="signUpButton" layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#SignUp" text="Sign Up" translateX="70.0" />
               </items>
             </ToolBar>
          </children>

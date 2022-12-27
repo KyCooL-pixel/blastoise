@@ -7,7 +7,7 @@ import com.blastoisefx.model.Auth;
 import com.blastoisefx.utils.Message;
 
 import javafx.fxml.FXML;
-
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class AuthController {
@@ -15,6 +15,8 @@ public class AuthController {
     private TextField emailValue;
     @FXML
     private TextField passwordValue;
+    @FXML
+    private Label signInLabel;
 
     @FXML
     private void Login() throws IOException {
@@ -36,15 +38,19 @@ public class AuthController {
             Message.showMessage("SUCCESS","NEW USER ADDED", "New user : "+ email);break;
             case 1:
             emailValue.clear();
-            emailValue.setPromptText("Please enter a valid email");break;
+            emailValue.setPromptText("Please enter a valid email*");
+            emailValue.setStyle("-fx-prompt-text-fill: #f50c0c");break;
             case 2:
             passwordValue.clear();
-            passwordValue.setPromptText("Password must be at least 8 characters long");break;
+            passwordValue.setPromptText("Password must be at least 8 characters long*");
+            passwordValue.setStyle("-fx-prompt-text-fill: #f50c0c");break;
             case 3:
             emailValue.clear();
-            emailValue.setPromptText("Please enter a valid email");
+            emailValue.setPromptText("Please enter a valid email*");
+            emailValue.setStyle("-fx-prompt-text-fill: #f50c0c");
             passwordValue.clear();
-            passwordValue.setPromptText("Password must be at least 8 characters long");
+            passwordValue.setPromptText("Password must be at least 8 characters long*");
+            passwordValue.setStyle("-fx-prompt-text-fill: #f50c0c");
         }
     }
 
