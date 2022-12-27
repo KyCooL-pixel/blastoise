@@ -1,21 +1,20 @@
 package com.blastoisefx.model;
 
 public class User {
-    private String name;
-    private String contactNumber;
+    private String email;
+    private String password;
 
     // create user by giving name and contact number
-    public User(String name, String contactNumber) {
-        this.name = name;
-        this.contactNumber = contactNumber;
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getEmail() {
+        return email;
     }
 
-    public String getcontactNumber() {
-        return contactNumber;
+    public String getPassword() {
+        return password;
     }
-
 }
