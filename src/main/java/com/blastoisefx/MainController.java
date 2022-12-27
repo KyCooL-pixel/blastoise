@@ -7,7 +7,11 @@ import javafx.fxml.FXML;
 public class MainController {
 
     @FXML
-    private void switchToPrimary() throws IOException {
-        App.setRoot("primary");
+    private void toLogin() throws IOException {
+        App.setRoot("login");
+    }
+    @FXML
+    private void toSignUp() throws IOException {
+        App.setRoot("signup");
     }
 }
