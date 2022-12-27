@@ -1,4 +1,5 @@
 # files to ignore
+users.txt
 target/
 pom.xml.tag
 pom.xml.releaseBackup
