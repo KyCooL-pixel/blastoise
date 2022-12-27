@@ -7,7 +7,12 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import com.blastoisefx.model.User;
@@ -22,6 +27,10 @@ public class App extends Application {
 
     // UI
     private static Scene scene;
+    @Override
+    public void init(){
+        loadUsers();
+    }
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -29,6 +38,40 @@ public class App extends Application {
         scene = new Scene(loadFXML("main"), 640, 480);
         stage.setScene(scene);
         stage.show();
+    }
+
+    @Override
+    public void stop() {
+        saveUsers();
+    }
+
+    private void saveUsers() {
+        try {
+            // Creating stream and writing the object
+            FileOutputStream fout = new FileOutputStream("users.txt");
+            ObjectOutputStream out = new ObjectOutputStream(fout);
+            out.writeObject(users);
+            out.flush();
+            // closing the stream
+            out.close();
+            System.out.println("success");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private void loadUsers() {
+        try {
+            // Creating stream to read the object
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream("users.txt"));
+            users = (ArrayList<User>) in.readObject();
+            // closing the stream
+            in.close();
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("Creating new database file for storing users");
+            File newUsertxt = new File("users.txt");
+        }
     }
 
     public static void setRoot(String fxml) throws IOException {
