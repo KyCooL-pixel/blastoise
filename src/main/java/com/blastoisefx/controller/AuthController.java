@@ -23,7 +23,7 @@ public class AuthController {
         String email = emailValue.getText();
         String password = passwordValue.getText();
         if (Auth.validate(email, password))
-            App.setRoot("example");
+            App.setRoot("queue");
         else {
             Message.showMessage("ERROR", "WRONG CREDENTIALS", "Please enter correct info or sign up if new user");
         }

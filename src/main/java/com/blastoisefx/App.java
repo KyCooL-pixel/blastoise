@@ -14,6 +14,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import com.blastoisefx.model.QueueItem;
 import com.blastoisefx.model.User;
 
 /**
@@ -23,6 +24,7 @@ public class App extends Application {
     // Logic part
     // will leave the users list here first
     private static ArrayList<User> users = new ArrayList<User>();
+    private static ArrayList<QueueItem> queueList = new ArrayList<QueueItem>();
 
     // UI
     private static Scene scene;
@@ -34,7 +36,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         stage.getIcons().add(new Image(App.class.getResourceAsStream("pokemon-blastoise-nicknames.jpg")));
-        scene = new Scene(loadFXML("queue"), 640, 480);
+        scene = new Scene(loadFXML("main"), 640, 480);
         stage.setScene(scene);
         stage.show();
     }
@@ -63,7 +65,9 @@ public class App extends Application {
         try {
             // Creating stream to read the object
             ObjectInputStream in = new ObjectInputStream(new FileInputStream("users.txt"));
-            users = (ArrayList<User>) in.readObject();
+            @SuppressWarnings ("unchecked")
+            ArrayList<User> usersFromDataBase = (ArrayList<User>) in.readObject();
+            users = usersFromDataBase;
             // closing the stream
             in.close();
         } catch (Exception e) {
