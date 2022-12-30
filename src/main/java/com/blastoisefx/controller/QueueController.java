@@ -56,9 +56,8 @@ public class QueueController {
         KeyFrame frame = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
                 seconds--;
-                countDownLabel.setText(seconds.toString());
+                countDownLabel.setText(formatTime(seconds));
                 if (seconds <= 0) {
                     time.stop();
                 }
