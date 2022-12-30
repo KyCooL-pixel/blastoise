@@ -17,8 +17,10 @@ import javafx.scene.control.Label;
 import javafx.util.Duration;
 
 public class QueueController {
+    // Initiate a queue here or should I?
+    private Queue<QueueItem> washQueue = new LinkedList<QueueItem>();
+
     // these two need to take from model
-    private final Integer starttime = 15;
     private Integer seconds = starttime;
 
     // normal fxml stuff
