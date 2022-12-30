@@ -79,6 +79,14 @@ public class QueueController {
         time.play();
     }
 
+    @FXML
+    private int computeTime(){
+        int temp =0;
+        for(QueueItem qItem: washQueue){
+            temp+=qItem.getDuration();
+        }
+        return temp;
+    }
     private String formatTime(int i){
         String time = String.format("%02d:%02d", i / 60, i % 60);
         return time;
