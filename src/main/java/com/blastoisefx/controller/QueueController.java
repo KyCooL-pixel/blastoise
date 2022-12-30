@@ -30,6 +30,12 @@ public class QueueController {
     private Button addTimeButton;
     @FXML
     private Button createQueueItemBtn;
+    @FXML
+    private Label ETALabel;
+    @FXML
+    private Label qLength;
+    @FXML
+    private Button mockQueueBtn;
 
     // Shares timeline
     Timeline time = new Timeline();
