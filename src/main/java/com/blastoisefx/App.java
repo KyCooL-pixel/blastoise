@@ -14,7 +14,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import com.blastoisefx.model.QueueItem;
 import com.blastoisefx.model.User;
 
 /**
@@ -24,8 +23,7 @@ public class App extends Application {
     // Logic part
     // will leave the users list here first
     private static ArrayList<User> users = new ArrayList<User>();
-    private static ArrayList<QueueItem> queueList = new ArrayList<QueueItem>();
-
+    private static User currUser;
     // UI
     private static Scene scene;
     @Override
@@ -91,6 +89,14 @@ public class App extends Application {
 
     public static ArrayList<User> getUsers() {
         return users;
+    }
+
+    public static User getCurrUser() {
+        return currUser;
+    }
+
+    public static void setCurrUser(User cu) {
+        currUser = cu;
     }
 
 }
