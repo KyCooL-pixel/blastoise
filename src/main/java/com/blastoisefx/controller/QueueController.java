@@ -13,7 +13,6 @@ import com.blastoisefx.utils.Message;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -26,7 +25,10 @@ public class QueueController {
     private Queue<QueueItem> washQueue = new LinkedList<QueueItem>();
 
     // these two need to take from model
-    private Integer seconds = starttime;
+    private Integer seconds=1;
+
+    // this keep track if user is already queueing or not
+    private boolean isQueued = false;
 
     // normal fxml stuff
     @FXML
@@ -119,9 +121,25 @@ public class QueueController {
     }
 
 
+
     @FXML
     private void createQueueItem(){
+        if(isQueued){
+            Message.showMessage("Error","Already Queued","You are currently in queue already");
+        }else{
+        washQueue.add(new QueueItem(App.getCurrUser(), LocalDateTime.now(), new WashMachine()));
+        ETATimeShow();
+        qLengthShow();
+        isQueued = true;
+        }
+    }
 
+    @FXML
+    private void mockQueue(){
+        washQueue.add(new QueueItem(App.getCurrUser(), LocalDateTime.now(), new WashMachine()));
+        if(!isQueued){
+            qLengthShow();
+        }
     }
 
 }
