@@ -6,7 +6,18 @@ This is an assignment made for the course TTTK2023 Object Oriented Software Engi
 2) research on log4j (logger library)
 3) make the main screen logo transparent background
 
+## KY TODO:
+1) We dont need a countDown timer implementation, just abuse the local date time function in java
+2) Research on how to pop the item in the queue once the duration of the machine is reached
+3) Dynamically adds queueItem to a UI list
 
+
+## A queueItem will terminate when
+1) Wash completed && idle for a period of time
+OR
+2) Wash completed  && User complete the wash session
+OR
+3) Wash is not completed but User ended it manually
 
 ### Concept
 1) Users will first sign up with an account
@@ -14,10 +25,10 @@ This is an assignment made for the course TTTK2023 Object Oriented Software Engi
 3) Users select a machine type to queue for
 4) A queue item is created and added into the queuelist consisting of
 ```
-    a) UserId
+    a) User name email or smtg
     b) MachineType
-    c) Time Stamp
-    d) QueueId
+    c) Time Stamp (start time + remaining time)
+    d) QueueId (as in how many in the list)
 ```
 
 ### App Structure
