@@ -42,7 +42,12 @@ public class QueueController {
 
     @FXML
     public void initialize() {
+        washQueue.add(new QueueItem(App.getCurrUser(), LocalDateTime.now(), new WashMachine()));
+        washQueue.add(new QueueItem(App.getCurrUser(), LocalDateTime.now(), new WashMachine()));
+        washQueue.add(new QueueItem(App.getCurrUser(), LocalDateTime.now(), new WashMachine()));
+        washQueue.add(new QueueItem(App.getCurrUser(), LocalDateTime.now(), new WashMachine()));
         localTimeShow();
+        seconds=computeTime();
         doTime();
     }
     @FXML
