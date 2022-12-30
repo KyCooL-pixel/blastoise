@@ -2,8 +2,13 @@ package com.blastoisefx.controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.LinkedList;
+import java.util.Queue;
+
+import com.blastoisefx.App;
+import com.blastoisefx.model.QueueItem;
+import com.blastoisefx.model.WashMachine;
+import com.blastoisefx.utils.Message;
 
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
