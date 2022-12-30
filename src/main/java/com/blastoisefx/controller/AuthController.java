@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.blastoisefx.App;
 import com.blastoisefx.model.Auth;
+import com.blastoisefx.model.User;
 import com.blastoisefx.utils.Message;
 
 import javafx.fxml.FXML;
@@ -22,9 +23,11 @@ public class AuthController {
     private void Login() throws IOException {
         String email = emailValue.getText();
         String password = passwordValue.getText();
-        if (Auth.validate(email, password))
+        User currUser = Auth.validate(email, password);
+        if (currUser != null) {
+            App.setCurrUser(currUser);
             App.setRoot("queue");
-        else {
+        } else {
             Message.showMessage("ERROR", "WRONG CREDENTIALS", "Please enter correct info or sign up if new user");
         }
     }
@@ -33,24 +36,27 @@ public class AuthController {
     private void SignUp() throws IOException {
         String email = emailValue.getText();
         String password = passwordValue.getText();
-        switch(Auth.addNewUser(email, password)){
+        switch (Auth.addNewUser(email, password)) {
             case 0:
-            Message.showMessage("SUCCESS","NEW USER ADDED", "New user : "+ email);break;
+                Message.showMessage("SUCCESS", "NEW USER ADDED", "New user : " + email);
+                break;
             case 1:
-            emailValue.clear();
-            emailValue.setPromptText("Please enter a valid email*");
-            emailValue.setStyle("-fx-prompt-text-fill: #f50c0c");break;
+                emailValue.clear();
+                emailValue.setPromptText("Please enter a valid email*");
+                emailValue.setStyle("-fx-prompt-text-fill: #f50c0c");
+                break;
             case 2:
-            passwordValue.clear();
-            passwordValue.setPromptText("Password must be at least 8 characters long*");
-            passwordValue.setStyle("-fx-prompt-text-fill: #f50c0c");break;
+                passwordValue.clear();
+                passwordValue.setPromptText("Password must be at least 8 characters long*");
+                passwordValue.setStyle("-fx-prompt-text-fill: #f50c0c");
+                break;
             case 3:
-            emailValue.clear();
-            emailValue.setPromptText("Please enter a valid email*");
-            emailValue.setStyle("-fx-prompt-text-fill: #f50c0c");
-            passwordValue.clear();
-            passwordValue.setPromptText("Password must be at least 8 characters long*");
-            passwordValue.setStyle("-fx-prompt-text-fill: #f50c0c");
+                emailValue.clear();
+                emailValue.setPromptText("Please enter a valid email*");
+                emailValue.setStyle("-fx-prompt-text-fill: #f50c0c");
+                passwordValue.clear();
+                passwordValue.setPromptText("Password must be at least 8 characters long*");
+                passwordValue.setStyle("-fx-prompt-text-fill: #f50c0c");
         }
     }
 

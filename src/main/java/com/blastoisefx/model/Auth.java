@@ -4,12 +4,12 @@ import com.blastoisefx.App;
 import com.blastoisefx.utils.Rgx;
 
 public class Auth {
-    public static boolean validate(String email, String password) {
+    public static User validate(String email, String password) {
         for (User user : App.getUsers()) {
             if (user.getEmail().equals(email) && user.getPassword().equals(password))
-                return true;
+                return user;
         }
-        return false;
+        return null;
     }
 
     public static int addNewUser(String email, String password) {
