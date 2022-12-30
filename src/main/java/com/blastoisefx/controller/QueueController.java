@@ -49,6 +49,15 @@ public class QueueController {
         };
         timer.start();
     }
+    @FXML
+    private void ETATimeShow(){
+        ETALabel.setText(LocalDateTime.now().plusSeconds(computeTime()).format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+    }
+
+    @FXML
+    private void qLengthShow(){
+        qLength.setText("Queue Length:" + washQueue.size());
+    }
     // This method does the count down stuff
     @FXML
     private void doTime() {
