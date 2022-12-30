@@ -79,6 +79,12 @@ public class QueueController {
         time.play();
     }
 
+    private String formatTime(int i){
+        String time = String.format("%02d:%02d", i / 60, i % 60);
+        return time;
+    }
+
+
     @FXML
     private void createQueueItem(){
 
