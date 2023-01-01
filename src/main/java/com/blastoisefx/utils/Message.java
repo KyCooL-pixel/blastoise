@@ -9,6 +9,6 @@ public class Message {
         alert.setTitle(title);
         alert.setHeaderText(header);
         alert.setContentText(Content);
-        alert.showAndWait();
+        alert.show();
     }
 }
