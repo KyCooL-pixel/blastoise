@@ -9,7 +9,7 @@ public class WashMachine extends MachineTypes {
 
     public WashMachine() {
         super();
-        this.setDuration(40);
+        this.setDuration(5);
     }
 
 }
