@@ -9,7 +9,7 @@
    <children>
       <Label text="Estimated waiting time">
          <font>
-            <Font size="23.0" />
+            <Font size="18.0" />
          </font>
       </Label>
       <Label fx:id="countDownLabel" contentDisplay="CENTER">
@@ -19,7 +19,7 @@
       </Label>
       <Label text="Current Time">
          <font>
-            <Font size="21.0" />
+            <Font size="18.0" />
          </font>
       </Label>
       <Label fx:id="localTimeLabel">
@@ -39,7 +39,12 @@
             <Font size="21.0" />
          </font>
       </Label>
-      <Label fx:id="qLength" text="Queue Length">
+      <Label text="Queue Length">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="qLength">
          <font>
             <Font size="17.0" />
          </font>
