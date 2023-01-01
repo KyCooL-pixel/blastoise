@@ -5,6 +5,7 @@ This is an assignment made for the course TTTK2023 Object Oriented Software Engi
 1) research on css stylesheets for javafx
 2) research on log4j (logger library)
 3) make the main screen logo transparent background
+4)  maybe can refactor the logics in queucontroller to a queuelist model
 
 ## KY TODO:
 1) We dont need a countDown timer implementation, just abuse the local date time function in java
