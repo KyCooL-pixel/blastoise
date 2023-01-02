@@ -41,23 +41,27 @@ public class AuthController {
                 Message.showMessage("SUCCESS", "NEW USER ADDED", "New user : " + email);
                 break;
             case 1:
-                emailValue.clear();
-                emailValue.setPromptText("Please enter a valid email*");
-                emailValue.setStyle("-fx-prompt-text-fill: #f50c0c");
+                clearResetEmail();
                 break;
             case 2:
-                passwordValue.clear();
-                passwordValue.setPromptText("Password must be at least 8 characters long*");
-                passwordValue.setStyle("-fx-prompt-text-fill: #f50c0c");
+                clearResetPassword();
                 break;
             case 3:
-                emailValue.clear();
-                emailValue.setPromptText("Please enter a valid email*");
-                emailValue.setStyle("-fx-prompt-text-fill: #f50c0c");
-                passwordValue.clear();
-                passwordValue.setPromptText("Password must be at least 8 characters long*");
-                passwordValue.setStyle("-fx-prompt-text-fill: #f50c0c");
+                clearResetEmail();
+                clearResetPassword();
         }
+    }
+
+    private void clearResetEmail(){
+        emailValue.clear();
+        emailValue.setPromptText("Please enter a valid email*");
+        emailValue.setStyle("-fx-prompt-text-fill: #f50c0c");
+    }
+
+    private void clearResetPassword(){
+        passwordValue.clear();
+        passwordValue.setPromptText("Password must be at least 8 characters long*");
+        passwordValue.setStyle("-fx-prompt-text-fill: #f50c0c");
     }
 
 }
