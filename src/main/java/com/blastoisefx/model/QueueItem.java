@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class QueueItem {
     private User user;
     private LocalDateTime startTime;
-    private MachineTypes machineTypes;
+    private MachineType machineTypes;
 
     private int duration;
 
@@ -18,11 +18,11 @@ public class QueueItem {
     private State state;
 
     // GETTERS AND SETTERS FOR EVERYTHING STARTS HERE
-    public MachineTypes getMachineTypes() {
+    public MachineType getMachineTypes() {
         return machineTypes;
     }
 
-    public void setMachineTypes(MachineTypes machineTypes) {
+    public void setMachineTypes(MachineType machineTypes) {
         this.machineTypes = machineTypes;
     }
 
@@ -61,7 +61,7 @@ public class QueueItem {
     // ENDS HERE
 
     // CONSTRUCTOR
-    public QueueItem(User user, LocalDateTime startTime, MachineTypes machineTypes) {
+    public QueueItem(User user, LocalDateTime startTime, MachineType machineTypes) {
         this.user = user;
         this.startTime = startTime;
         this.machineTypes = machineTypes;

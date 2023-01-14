@@ -1,6 +1,6 @@
 package com.blastoisefx.model;
 
-public class MachineTypes {
+public class MachineType {
     private int duration;
     private double price;
     public enum MachineState{
@@ -32,7 +32,7 @@ public class MachineTypes {
     }
 
     // Constuctor here
-    public MachineTypes(){
+    public MachineType(){
 
     }
 }

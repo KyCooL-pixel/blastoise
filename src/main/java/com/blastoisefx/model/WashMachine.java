@@ -1,6 +1,6 @@
 package com.blastoisefx.model;
 
-public class WashMachine extends MachineTypes {
+public class WashMachine extends MachineType {
     public enum Temperature{
         LOW,
         MID,
