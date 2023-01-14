@@ -12,20 +12,31 @@ public class Auth {
         return null;
     }
 
-    public static int addNewUser(String email, String password) {
-        if (Rgx.regexValidateEmail(email) && password.length() >= 8) {
+    public enum AuthStatus {
+        SUCCESS,
+        INVALID_EMAIL,
+        INVALID_PASSWORD,
+        INVALID_EMAIL_AND_PASSWORD
+    }
+
+    public static AuthStatus addNewUser(String email, String password) {
+        boolean isEmailValid = Rgx.regexValidateEmail(email);
+        boolean isPasswordValid = password.length() >= 8;
+
+        if (isEmailValid && isPasswordValid) {
             App.getUsers().add(new User(email, password));
-            return 0;
+            return AuthStatus.SUCCESS;
         }
-        else if(!Rgx.regexValidateEmail(email) && password.length() >= 8){
-            return 1;
+
+        if (!isEmailValid && isPasswordValid) {
+            return AuthStatus.INVALID_EMAIL;
         }
-        else if(Rgx.regexValidateEmail(email) && !(password.length() >= 8)){
-            return 2;
+
+        if (!isPasswordValid && isEmailValid) {
+            return AuthStatus.INVALID_PASSWORD;
         }
-        else{
-            return 3;
-        }
+
+        return AuthStatus.INVALID_EMAIL_AND_PASSWORD;
     }
 
 }

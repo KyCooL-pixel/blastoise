@@ -36,17 +36,18 @@ public class AuthController {
     private void SignUp() throws IOException {
         String email = emailValue.getText();
         String password = passwordValue.getText();
+
         switch (Auth.addNewUser(email, password)) {
-            case 0:
+            case SUCCESS:
                 Message.showMessage("SUCCESS", "NEW USER ADDED", "New user : " + email);
                 break;
-            case 1:
+            case INVALID_EMAIL:
                 clearResetEmail();
                 break;
-            case 2:
+            case INVALID_PASSWORD:
                 clearResetPassword();
                 break;
-            case 3:
+            case INVALID_EMAIL_AND_PASSWORD:
                 clearResetEmail();
                 clearResetPassword();
         }
