@@ -5,31 +5,19 @@ import java.time.LocalDateTime;
 public class QueueItem {
     private User user;
     private LocalDateTime startTime;
-    private MachineType machineTypes;
-
+    private State state = State.WAITING;
+    private Payment payment;
     private int duration;
+
 
     public enum State {
         WAITING,
-        WASHING,
+        OPERATING,
         FINISHED
     }
 
-    private State state;
 
     // GETTERS AND SETTERS FOR EVERYTHING STARTS HERE
-    public MachineType getMachineTypes() {
-        return machineTypes;
-    }
-
-    public void setMachineTypes(MachineType machineTypes) {
-        this.machineTypes = machineTypes;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
     public State getState() {
         return state;
     }
@@ -42,31 +30,33 @@ public class QueueItem {
         return user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public Payment getPayment() {
+        return payment;
     }
 
     public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
-    }
-
     public Integer getDuration() {
         return duration;
+    }
+
+    public LocalDateTime getEndTime() {
+        return startTime.plusMinutes(duration);
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
     }
 
     // ENDS HERE
 
     // CONSTRUCTOR
-    public QueueItem(User user, LocalDateTime startTime, MachineType machineTypes) {
+    public QueueItem(User user, Payment payment, int duration) {
         this.user = user;
-        this.startTime = startTime;
-        this.machineTypes = machineTypes;
-        this.state = State.WAITING;
-        this.duration = machineTypes.getDuration();
+        this.payment = payment;
+        this.startTime = LocalDateTime.now();
+        this.duration = duration;
     }
-
 }
