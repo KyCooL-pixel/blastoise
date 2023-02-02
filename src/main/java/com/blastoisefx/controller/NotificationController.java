@@ -12,6 +12,6 @@ public class NotificationController {
     private Button backButton;
     @FXML
     private void backToMenu() throws IOException{
-        App.setRoot("menu");
+        App.setRoot("menu",340,400);
     }
 }

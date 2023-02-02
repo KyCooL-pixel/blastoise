@@ -9,21 +9,20 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane fx:controller="com.blastoisefx.controller.PaymentController" maxHeight="150" maxWidth="150" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150" prefWidth="150" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="310.0" maxWidth="555.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="310.0" prefWidth="555.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blastoisefx.controller.PaymentController">
    <children>
-      <Label layoutX="28.0" layoutY="14.0" prefHeight="35.0" prefWidth="93.0" text="Payment">
+      <Label layoutX="214.0" layoutY="14.0" prefHeight="35.0" prefWidth="93.0" text="Payment">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="28.0" layoutY="65.0" text="Payment Method:">
+      <Label layoutX="118.0" layoutY="65.0" text="Payment Method:">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <ComboBox layoutX="165.0" layoutY="63.0" prefHeight="25.0" prefWidth="192.0" promptText="Choose a payment method" />
-      <Pane layoutX="28.0" layoutY="97.0" prefHeight="119.0" prefWidth="355.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-border-width: 0.7;" visible="false">
+      <ComboBox fx:id="paymentBox" layoutX="287.0" layoutY="63.0" onAction="#itemSelectedChanged" prefHeight="25.0" prefWidth="192.0" promptText="Choose a payment method" />
+      <Pane fx:id="creditCardPane" layoutX="28.0" layoutY="97.0" prefHeight="150.0" prefWidth="355.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-border-width: 0.7;" visible="false">
          <children>
             <Label layoutX="12.0" layoutY="4.0" text="Card Details" underline="true" />
             <Label layoutX="14.0" layoutY="28.0" prefHeight="17.0" prefWidth="64.0" text="Card No" />
@@ -34,11 +33,11 @@
             <TextField layoutX="135.0" layoutY="80.0" prefHeight="25.0" prefWidth="192.0" />
          </children>
       </Pane>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="132.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="eWalletQR" fitHeight="150.0" fitWidth="200.0" layoutX="132.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@qrcode.jpeg" />
          </image>
       </ImageView>
-      <Button fx:id="doneButton" layoutX="188.0" layoutY="271.0" mnemonicParsing="false" text="DONE" />
+      <Button fx:id="doneButton" layoutX="236.0" layoutY="271.0" mnemonicParsing="false" onMouseClicked="#backToMachines" text="DONE" />
    </children>
 </Pane>

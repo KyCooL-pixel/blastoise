@@ -9,6 +9,6 @@ import javafx.fxml.FXML;
 public class RouteController {
     @FXML
     private void toLogin() throws IOException {
-        App.setRoot("auth");
+        App.setRoot("auth",435,279);
     }
 }

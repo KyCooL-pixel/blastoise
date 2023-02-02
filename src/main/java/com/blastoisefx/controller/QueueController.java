@@ -102,7 +102,7 @@ public class QueueController {
                 if (LocalTimeLabel.getText().equals(dryAvailable.getText())) {
                     dryAvailable.setText("NOW");
                     Message.showMessage("Queue for Dry Completed", "It's your turn now.",
-                    "Go to My Machines for next step");
+                            "Go to My Machines for next step");
                     dryAvailable.setText("--------------------");
                     addMachines(dryQueue.poll());
                     dryQueue.clear();
@@ -235,6 +235,7 @@ public class QueueController {
             washAvailable.setText("NOW");
             Message.showMessage("Queue Completed", "It's your turn now.",
                     "Go to next page for payment confirmation");
+            addMachines(new QueueItem(App.getCurrUser(), new Payment(0, null), new Washer()));
             washAvailable.setText("----------------");
         } else {
             washQueueLengthOnceQueued = washQueue.size();
@@ -266,6 +267,7 @@ public class QueueController {
             dryAvailable.setText("NOW");
             Message.showMessage("Queue Completed", "It's your turn now.",
                     "Go to next page for payment confirmation");
+            addMachines(new QueueItem(App.getCurrUser(), new Payment(0, null), new Dryer()));
             dryAvailable.setText("----------------");
         } else {
             dryQueueLengthOnceQueued = dryQueue.size();
@@ -291,12 +293,12 @@ public class QueueController {
 
     @FXML
     private void backToMainMenu() throws IOException {
-        App.setRoot("menu");
+        App.setRoot("menu",340,400);
     }
 
     @FXML
     private void toMyMachines() throws IOException {
-        App.setRoot("myMachines");
+        App.setRoot("myMachines",565,420);
     }
 
     private void addMachines(QueueItem qItem) {

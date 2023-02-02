@@ -13,16 +13,16 @@ public class MenuController {
 
     @FXML
     private void toQueue() throws IOException{
-        App.setRoot("queue");
+        App.setRoot("queue",400,400);
     }
 
     @FXML
     private void toMachines() throws IOException{
-        App.setRoot("myMachines");
+        App.setRoot("myMachines",565,440);
     }
 
     @FXML
     private void toNotifications() throws IOException{
-        App.setRoot("notification");
+        App.setRoot("notification",400,400);
     }
 }

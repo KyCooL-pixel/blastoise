@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="529.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="527.0" prefWidth="529.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blastoisefx.controller.QueueController">
+<Pane maxHeight="-Infinity" maxWidth="594.0" minHeight="480.0" minWidth="-Infinity" prefHeight="480.0" prefWidth="594.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blastoisefx.controller.QueueController">
    <children>
       <Pane layoutX="46.0" layoutY="48.0" pickOnBounds="false" prefHeight="174.0" prefWidth="529.0" style="-fx-border-color: black;">
          <children>

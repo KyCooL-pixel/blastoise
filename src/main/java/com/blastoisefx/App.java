@@ -8,7 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.util.Duration;
+// import javafx.util.Duration;
+import javafx.stage.Window;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -76,7 +77,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         stage.getIcons().add(new Image(App.class.getResourceAsStream("pokemon-blastoise-nicknames.jpg")));
-        scene = new Scene(loadFXML("main"), 640, 480);
+        scene = new Scene(loadFXML("main"), 340, 400);
         stage.setScene(scene);
         stage.show();
     }
@@ -120,8 +121,11 @@ public class App extends Application {
         return machineTypes;
     }
 
-    public static void setRoot(String fxml) throws IOException {
+    public static void setRoot(String fxml, double width, double height) throws IOException {
         scene.setRoot(loadFXML(fxml));
+        Window window = scene.getWindow();
+        window.setWidth(width);
+        window.setHeight(height);
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
@@ -149,7 +153,7 @@ public class App extends Application {
         currUser = cu;
     }
 
-    public static ObservableList<Machine> getMachines(){
+    public static ObservableList<Machine> getMachines() {
         return myMachines;
     }
 

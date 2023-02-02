@@ -26,7 +26,7 @@ public class AuthController {
         User currUser = Auth.validate(email, password);
         if (currUser != null) {
             App.setCurrUser(currUser);
-            App.setRoot("menu");
+            App.setRoot("menu",340,400);
         } else {
             Message.showMessage("ERROR", "WRONG CREDENTIALS", "Please enter correct info or sign up if new user");
         }
