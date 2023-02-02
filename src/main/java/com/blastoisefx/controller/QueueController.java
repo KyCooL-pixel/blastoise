@@ -1,13 +1,14 @@
 package com.blastoisefx.controller;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.Queue;
 
 import com.blastoisefx.App;
+import com.blastoisefx.model.Payment;
 import com.blastoisefx.model.QueueItem;
-import com.blastoisefx.model.WashMachine;
 import com.blastoisefx.utils.Message;
 
 import javafx.animation.AnimationTimer;
@@ -24,61 +25,86 @@ import javafx.util.Duration;
 public class QueueController {
     // Initiate a queue here
     private Queue<QueueItem> washQueue = new LinkedList<QueueItem>();
+    private Queue<QueueItem> dryQueue = new LinkedList<QueueItem>();
 
     // declare an elapsed variable here that will let the queuItem know it should be
     // ended
     // once it reaches the duration
-    private int elapsedSeconds = 0;
+    private int elapsedSecondsWash = 0;
+    private int elapsedSecondsDry = 0;
 
     // set a queue length variable once user pressed queue
-    private int queueLengthOnceQueued;
+    private int washQueueLengthOnceQueued;
+    private int dryQueueLengthOnceQueued;
     // these two need to take from model
-    private Integer seconds = 1;
+    private Integer washSeconds = 1;
+    private Integer drySeconds = 1;
 
     // this keep track if user is already queueing or not
-    private boolean isQueued = false;
+    private boolean isQueuedWash = false;
+    private boolean isQueuedDry = false;
+    @FXML
+    private Label LocalTimeLabel;
 
-    // normal fxml stuff
     @FXML
-    private Label countDownLabel;
+    private Button washQueueBtn;
     @FXML
-    private Label localTimeLabel;
+    private Label washAvailable;
     @FXML
-    private Button addTimeButton;
+    private Label washLength;
     @FXML
-    private Button createQueueItemBtn;
+    private Button rWashQueueBtn;
+
     @FXML
-    private Label ETALabel;
+    private Button dryQueueBtn;
     @FXML
-    private Label qLength;
+    private Label dryAvailable;
     @FXML
-    private Button mockQueueBtn;
+    private Label dryLength;
+    @FXML
+    private Button rDryQueueBtn;
 
     // Shares timeline
-    Timeline time = new Timeline();
+    Timeline washTime = new Timeline();
+    Timeline dryTime = new Timeline();
 
     @FXML
     public void initialize() {
         // mock data
-
-        localTimeShow();
-        qLengthShow();
-        seconds += computeTime();
-        doTime();
+        LocalTimeShow();
+        washQLengthShow();
+        dryQLengthShow();
+        washSeconds += washComputeTime();
+        drySeconds += dryComputeTime();
+        doTimeWash();
+        doTimeDry();
     }
 
     @FXML
-    private void localTimeShow() {
+    private void LocalTimeShow() {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                localTimeLabel.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
-                if (localTimeLabel.getText().equals(ETALabel.getText())) {
-                    ETALabel.setText("NOW");
-                    Message.showMessage("Queue Completed", "It's your turn now.",
-                            "Go to next page for payment confirmation");
+                LocalTimeLabel.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+                if (LocalTimeLabel.getText().equals(washAvailable.getText())) {
+                    washAvailable.setText("NOW");
+                    Message.showMessage("Queue for Wash Completed", "It's your turn now.",
+                            "Go to My Machines for next step");
+                    washAvailable.setText("--------------------");
                     washQueue.poll();
-                    isQueued = false;
+                    isQueuedWash = false;
+                    washQLengthShow();
+                    washLength.setText(0 + "");
+                }
+                if (LocalTimeLabel.getText().equals(dryAvailable.getText())) {
+                    dryAvailable.setText("NOW");
+                    Message.showMessage("Queue for Dry Completed", "It's your turn now.",
+                            "Go to My Machines for next step");
+                    dryAvailable.setText("--------------------");
+                    dryQueue.poll();
+                    isQueuedDry = false;
+                    dryQLengthShow();
+                    dryLength.setText(0 + "");
                 }
             }
 
@@ -87,62 +113,108 @@ public class QueueController {
     }
 
     @FXML
-    private void ETATimeShow() {
-        ETALabel.setText(
-                LocalDateTime.now().plusSeconds(computeTime()).format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+    private void washETATimeShow() {
+        washAvailable.setText(
+                LocalDateTime.now().plusSeconds(washComputeTime()).format(DateTimeFormatter.ofPattern("HH:mm:ss")));
     }
 
     @FXML
-    private void qLengthShow() {
-        if (!isQueued)
-            qLength.setText(washQueue.size() + "");
+    private void dryETATimeShow() {
+        dryAvailable.setText(
+                LocalDateTime.now().plusSeconds(dryComputeTime()).format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+    }
+
+    @FXML
+    private void washQLengthShow() {
+        if (!isQueuedWash)
+            washLength.setText(washQueue.size() + "");
         else
-            qLength.setText(Integer.toString(queueLengthOnceQueued));
+            washLength.setText(Integer.toString(dryQueueLengthOnceQueued));
+    }
+
+    @FXML
+    private void dryQLengthShow() {
+        if (!isQueuedDry)
+            dryLength.setText(dryQueue.size() + "");
+        else
+            dryLength.setText(Integer.toString(washQueueLengthOnceQueued));
     }
 
     // This method does the count down stuff
     @FXML
-    private void doTime() {
+    private void doTimeWash() {
         // Timeline time = new Timeline();
         KeyFrame frame = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (seconds <= 1) {
-                    time.stop();
+                if (washSeconds <= 1) {
+                    washTime.stop();
                 }
-                elapsedSeconds++;
-                seconds--;
-                countDownLabel.setText(formatTime(seconds));
-                if (washQueue.peek() != null && elapsedSeconds == washQueue.peek().getDuration()) {
+                elapsedSecondsWash++;
+                washSeconds--;
+                if (washQueue.peek() != null && elapsedSecondsWash == washQueue.peek().getDuration()) {
                     washQueue.poll();
-                    elapsedSeconds = 0;
-                    if(queueLengthOnceQueued>0)
-                        queueLengthOnceQueued--;
-                    qLengthShow();
+                    elapsedSecondsWash = 0;
+                    if (washQueueLengthOnceQueued > 0)
+                        washQueueLengthOnceQueued--;
+                    washQLengthShow();
                 }
             }
         });
-        time.setCycleCount(Timeline.INDEFINITE);
-        time.getKeyFrames().add(frame);
-        if (time != null) {
-            time.stop();
+        washTime.setCycleCount(Timeline.INDEFINITE);
+        washTime.getKeyFrames().add(frame);
+        if (washTime != null) {
+            washTime.stop();
         }
-        time.play();
+        washTime.play();
+    }
+
+    // This method does the count down stuff
+    @FXML
+    private void doTimeDry() {
+        // Timeline time = new Timeline();
+        KeyFrame frame = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if (drySeconds <= 1) {
+                    dryTime.stop();
+                }
+                elapsedSecondsDry++;
+                drySeconds--;
+                if (dryQueue.peek() != null && elapsedSecondsDry == dryQueue.peek().getDuration()) {
+                    dryQueue.poll();
+                    elapsedSecondsDry = 0;
+                    if (dryQueueLengthOnceQueued > 0)
+                        dryQueueLengthOnceQueued--;
+                    dryQLengthShow();
+                }
+            }
+        });
+        dryTime.setCycleCount(Timeline.INDEFINITE);
+        dryTime.getKeyFrames().add(frame);
+        if (dryTime != null) {
+            dryTime.stop();
+        }
+        dryTime.play();
     }
 
     @FXML
-    private void addTime() {
-        time.stop();
-        seconds += 5;
-        time.play();
-    }
-
-    @FXML
-    private int computeTime() {
+    private int washComputeTime() {
         int temp = 0;
         for (QueueItem qItem : washQueue) {
             temp += qItem.getDuration();
         }
+        temp -= 10;
+        return temp;
+    }
+
+    @FXML
+    private int dryComputeTime() {
+        int temp = 0;
+        for (QueueItem qItem : dryQueue) {
+            temp += qItem.getDuration();
+        }
+        temp -= 10;
         return temp;
     }
 
@@ -152,36 +224,67 @@ public class QueueController {
     }
 
     @FXML
-    private void createQueueItem() {
-        if (isQueued) {
+    private void washCreateQueueItem() {
+        if (isQueuedWash) {
             Message.showMessage("Error", "Already Queued", "You are currently in queue already");
-        }
-        else if (washQueue.size()==0){
-            ETALabel.setText("NOW");
+        } else if (washQueue.size() == 0) {
+            washAvailable.setText("NOW");
             Message.showMessage("Queue Completed", "It's your turn now.",
                     "Go to next page for payment confirmation");
-        }
-         else {
-            // TODO change to dynamic input here : line 147
-            queueLengthOnceQueued = washQueue.size();
-            QueueItem newItem = new QueueItem(App.getCurrUser(), LocalDateTime.now(), new WashMachine());
+        } else {
+            washQueueLengthOnceQueued = washQueue.size();
+            QueueItem newItem = new QueueItem(App.getCurrUser(), new Payment(0, null), 10);
             washQueue.add(newItem);
-            ETATimeShow();
-            isQueued = true;
+            washETATimeShow();
+            isQueuedWash = true;
         }
     }
 
     @FXML
-    private void mockQueue() {
-        QueueItem newItem = new QueueItem(App.getCurrUser(), LocalDateTime.now(), new WashMachine());
+    private void washMockQueue() {
+        QueueItem newItem = new QueueItem(App.getCurrUser(), new Payment(0, null), 10);
         washQueue.add(newItem);
-        if (!isQueued) {
+        if (!isQueuedWash) {
             // add 1 to make up for the keyframe lag
-            seconds += newItem.getDuration() + 1;
-            if (time.getStatus() == Status.STOPPED)
-                time.play();
-            qLengthShow();
+            washSeconds += newItem.getDuration() + 1;
+            if (washTime.getStatus() == Status.STOPPED)
+                washTime.play();
+            washQLengthShow();
         }
+    }
 
+    @FXML
+    private void dryCreateQueueItem() {
+        if (isQueuedDry) {
+            Message.showMessage("Error", "Already Queued", "You are currently in queue already");
+        } else if (dryQueue.size() == 0) {
+            dryAvailable.setText("NOW");
+            Message.showMessage("Queue Completed", "It's your turn now.",
+                    "Go to next page for payment confirmation");
+        } else {
+            dryQueueLengthOnceQueued = dryQueue.size();
+            QueueItem newItem = new QueueItem(App.getCurrUser(), new Payment(0, null), 10);
+            dryQueue.add(newItem);
+            dryETATimeShow();
+            isQueuedDry = true;
+        }
+    }
+
+    @FXML
+    private void dryMockQueue() {
+        QueueItem newItem = new QueueItem(App.getCurrUser(), new Payment(0, null), 10);
+        dryQueue.add(newItem);
+        if (!isQueuedDry) {
+            // add 1 to make up for the keyframe lag
+            drySeconds += newItem.getDuration() + 1;
+            if (dryTime.getStatus() == Status.STOPPED)
+                dryTime.play();
+            dryQLengthShow();
+        }
+    }
+
+    @FXML
+    private void backToMainMenu() throws IOException {
+        App.setRoot("menu");
     }
 }

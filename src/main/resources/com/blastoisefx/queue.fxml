@@ -2,52 +2,71 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blastoisefx.controller.QueueController">
+<Pane maxHeight="-Infinity" maxWidth="529.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="527.0" prefWidth="529.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blastoisefx.controller.QueueController">
    <children>
-      <Label text="Estimated waiting time">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="countDownLabel" contentDisplay="CENTER">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label text="Current Time">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="localTimeLabel">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Label>
-      <Button fx:id="createQueueItemBtn" mnemonicParsing="false" onMouseClicked="#createQueueItem" text="Queue" />
-      <Button fx:id="mockQueueBtn" mnemonicParsing="false" onMouseClicked="#mockQueue" text="Random Queues" />
-      <Label text="Estimated available time">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="ETALabel">
+      <Pane layoutX="46.0" layoutY="48.0" pickOnBounds="false" prefHeight="174.0" prefWidth="529.0" style="-fx-border-color: black;">
+         <children>
+            <Button fx:id="washQueueBtn" layoutX="438.0" layoutY="136.0" mnemonicParsing="false" onMouseClicked="#washCreateQueueItem" prefHeight="25.0" prefWidth="73.0" text="Queue" />
+            <Button fx:id="rWashQueueBtn" layoutX="318.0" layoutY="136.0" mnemonicParsing="false" onMouseClicked="#washMockQueue" text="Random Queues" />
+            <Label layoutX="166.0" layoutY="90.0" text="Estimated available time">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="washAvailable" layoutX="383.0" layoutY="85.0" prefHeight="31.0" prefWidth="126.0" text="---------------" />
+            <Label fx:id="wQLength" layoutX="166.0" layoutY="70.0" text="Queue Length">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="washLength" layoutX="383.0" layoutY="67.0" prefHeight="26.0" prefWidth="126.0" text="-------------------" />
+            <ImageView fx:id="washingMachineIMG" fitHeight="174.0" fitWidth="153.0" layoutX="7.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="163.0" layoutY="3.0" text="WASHING MACHINE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Label fx:id="LocalTimeLabel" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="207.0" layoutY="437.0" pickOnBounds="false" prefHeight="31.0" prefWidth="207.0" text="local time now" textAlignment="CENTER">
          <font>
             <Font size="21.0" />
          </font>
       </Label>
-      <Label text="Queue Length">
+      <Pane layoutX="46.0" layoutY="254.0" pickOnBounds="false" prefHeight="174.0" prefWidth="529.0" style="-fx-border-color: black;">
+         <children>
+            <Button fx:id="dryQueueBtn" layoutX="440.0" layoutY="135.0" mnemonicParsing="false" onMouseClicked="#dryCreateQueueItem" prefHeight="25.0" prefWidth="73.0" text="Queue" />
+            <Button fx:id="rDryQueueBtn" layoutX="311.0" layoutY="135.0" mnemonicParsing="false" onMouseClicked="#dryMockQueue" text="Random Queues" />
+            <Label layoutX="166.0" layoutY="93.0" text="Estimated available time">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="dryAvailable" layoutX="383.0" layoutY="88.0" prefHeight="31.0" prefWidth="126.0" text="------------" />
+            <Label layoutX="166.0" layoutY="73.0" text="Queue Length">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="dryLength" layoutX="383.0" layoutY="70.0" prefHeight="26.0" prefWidth="126.0" text="-----------------------" />
+            <ImageView fx:id="dryingMachineIMG" fitHeight="174.0" fitWidth="153.0" layoutX="7.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="163.0" layoutY="3.0" text="DRYING MACHINE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Button fx:id="backBtn" graphicTextGap="0.0" layoutX="46.0" layoutY="440.0" mnemonicParsing="false" onMouseClicked="#backToMainMenu" pickOnBounds="false" prefHeight="25.0" prefWidth="60.0" text="Back" />
+      <Label graphicTextGap="0.0" layoutX="255.0" layoutY="14.0" pickOnBounds="false" text="Queue" textFill="#4418ac">
          <font>
-            <Font size="16.0" />
+            <Font name="System Bold" size="22.0" />
          </font>
       </Label>
-      <Label fx:id="qLength">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
+      <Button fx:id="myMachinesBtn" graphicTextGap="0.0" layoutX="485.0" layoutY="440.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="25.0" prefWidth="88.0" text="My Machines" />
    </children>
-</VBox>
+</Pane>
