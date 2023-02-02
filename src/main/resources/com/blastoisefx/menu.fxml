@@ -6,14 +6,14 @@
 <?import javafx.scene.text.Font?>
 
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:controller="com.blastoisefx.controller.MenuController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="247.0" layoutY="3.0" text="Blastoise" textFill="#2d0991">
          <font>
             <Font name="Bookman Old Style Bold Italic" size="22.0" />
          </font>
       </Label>
-      <Button layoutX="257.0" layoutY="111.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="86.0" style="-fx-alignment: center;" text="Queue" />
+      <Button fx:id="toQueueBtn" layoutX="257.0" layoutY="111.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="86.0" style="-fx-alignment: center;" text="Queue" onMouseClicked="#toQueue" />
       <Button layoutX="257.0" layoutY="151.0" mnemonicParsing="false" style="-fx-alignment: center;" text="My Machines" />
       <Button layoutX="257.0" layoutY="224.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="86.0" style="-fx-alignment: center;" text="Settings" />
       <Button layoutX="257.0" layoutY="188.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="86.0" style="-fx-alignment: center;" text="Notification" />

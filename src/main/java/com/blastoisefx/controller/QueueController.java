@@ -92,6 +92,7 @@ public class QueueController {
                             "Go to My Machines for next step");
                     washAvailable.setText("--------------------");
                     washQueue.poll();
+                    washQueue.poll();
                     isQueuedWash = false;
                     washQLengthShow();
                     washLength.setText(0 + "");
@@ -101,6 +102,7 @@ public class QueueController {
                     Message.showMessage("Queue for Dry Completed", "It's your turn now.",
                             "Go to My Machines for next step");
                     dryAvailable.setText("--------------------");
+                    dryQueue.poll();
                     dryQueue.poll();
                     isQueuedDry = false;
                     dryQLengthShow();
@@ -231,6 +233,7 @@ public class QueueController {
             washAvailable.setText("NOW");
             Message.showMessage("Queue Completed", "It's your turn now.",
                     "Go to next page for payment confirmation");
+            washAvailable.setText("----------------");
         } else {
             washQueueLengthOnceQueued = washQueue.size();
             QueueItem newItem = new QueueItem(App.getCurrUser(), new Payment(0, null), 10);
@@ -261,6 +264,7 @@ public class QueueController {
             dryAvailable.setText("NOW");
             Message.showMessage("Queue Completed", "It's your turn now.",
                     "Go to next page for payment confirmation");
+            dryAvailable.setText("----------------");
         } else {
             dryQueueLengthOnceQueued = dryQueue.size();
             QueueItem newItem = new QueueItem(App.getCurrUser(), new Payment(0, null), 10);
