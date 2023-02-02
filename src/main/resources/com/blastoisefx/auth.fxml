@@ -11,7 +11,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="279.0" prefWidth="435.0" style="-fx-background-color: #AED6F1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blastoisefx.controller.AuthController">
    <top>
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="56.0" prefWidth="122.0" text="Login" textAlignment="CENTER" BorderPane.alignment="CENTER">
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="53.0" prefWidth="122.0" text="Login" textAlignment="CENTER" BorderPane.alignment="CENTER">
          <font>
             <Font name="Bookman Old Style Bold Italic" size="35.0" />
          </font>
@@ -35,11 +35,11 @@
             <PasswordField fx:id="passwordValue" layoutX="92.0" layoutY="104.0" prefHeight="25.0" prefWidth="252.0" promptText="Password must be at least 8 characters long" />
             <ToolBar layoutX="56.0" layoutY="151.0" prefHeight="42.0" prefWidth="305.0" style="-fx-background-color: transparent; -fx-spacing: 10;">
                <items>
-                  <Button fx:id="loginButton" mnemonicParsing="false" onMouseClicked="#Login" prefHeight="26.0" prefWidth="77.0" text="Login" translateX="70.0">
+                  <Button fx:id="loginButton" blendMode="SRC_ATOP" mnemonicParsing="false" onMouseClicked="#Login" prefHeight="26.0" prefWidth="77.0" text="Login" translateX="70.0">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font></Button>
-                  <Button fx:id="signUpButton" layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#SignUp" prefHeight="26.0" prefWidth="75.0" text="Sign Up" translateX="70.0">
+                  <Button fx:id="signUpButton" blendMode="SRC_ATOP" layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#SignUp" prefHeight="26.0" prefWidth="75.0" text="Sign Up" translateX="70.0">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font></Button>

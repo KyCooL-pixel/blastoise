@@ -11,14 +11,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="565.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blastoisefx.controller.MachinesController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="565.0" style="-fx-background-color: #AED6F1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blastoisefx.controller.MachinesController">
    <children>
-      <Label layoutX="211.0" layoutY="21.0" text="My Machines">
+      <Label layoutX="191.0" layoutY="14.0" text="My Machines">
          <font>
-            <Font name="System Bold" size="23.0" />
+            <Font name="Bookman Old Style Bold Italic" size="27.0" />
          </font>
       </Label>
-      <ListView fx:id="machinesView" layoutX="43.0" layoutY="64.0" prefHeight="295.0" prefWidth="131.0" style="-fx-border-color: black; -fx-border-radius: 10;" />
+      <ListView fx:id="machinesView" layoutX="43.0" layoutY="64.0" prefHeight="295.0" prefWidth="131.0" style="-fx-border-color: black;" />
       <Pane layoutX="192.0" layoutY="64.0" prefHeight="238.0" prefWidth="330.0" style="-fx-border-color: black; -fx-border-radius: 10;">
          <children>
             <HBox alignment="CENTER" layoutX="34.0" layoutY="56.0" prefHeight="80.0" prefWidth="263.0">
@@ -27,12 +27,12 @@
                      <children>
                         <Label prefHeight="17.0" prefWidth="47.0" text="Load">
                            <font>
-                              <Font size="14.0" />
+                              <Font name="Berlin Sans FB" size="14.0" />
                            </font>
                         </Label>
                         <Label prefHeight="18.0" prefWidth="86.0" text="Temperature">
                            <font>
-                              <Font size="14.0" />
+                              <Font name="Berlin Sans FB" size="14.0" />
                            </font>
                         </Label>
                      </children>
@@ -48,24 +48,24 @@
                   </VBox>
                </children>
             </HBox>
-            <Label fx:id="machineTypeLabel" layoutX="100.0" layoutY="4.0" text="MACHINETYPE">
+            <Label fx:id="machineTypeLabel" layoutX="90.0" layoutY="14.0" text="MACHINETYPE">
                <font>
-                  <Font size="20.0" />
+                  <Font name="Berlin Sans FB" size="23.0" />
                </font>
             </Label>
-            <Label layoutX="14.0" layoutY="159.0" text="Finished Time">
+            <Label layoutX="37.0" layoutY="156.0" text="Finished Time">
                <font>
-                  <Font size="16.0" />
+                  <Font name="Berlin Sans FB Bold" size="16.0" />
                </font>
             </Label>
-            <Label fx:id="time" layoutX="14.0" layoutY="184.0" prefHeight="30.0" prefWidth="159.0" text="----------------------" textAlignment="CENTER">
+            <Label fx:id="time" layoutX="37.0" layoutY="185.0" prefHeight="30.0" prefWidth="159.0" text="-------------------" textAlignment="CENTER">
                <font>
-                  <Font size="17.0" />
+                  <Font name="Berlin Sans FB" size="17.0" />
                </font>
             </Label>
             <Button fx:id="lockButton" layoutX="256.0" layoutY="156.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="60.0" style="-fx-border-color: black;" text="LOCK">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="Berlin Sans FB Bold" size="14.0" />
                </font>
             </Button>
          </children></Pane>
@@ -77,11 +77,26 @@
                </font>
             </Label>
             <TextField fx:id="priceField" layoutX="150.0" layoutY="12.0" prefHeight="25.0" prefWidth="112.0" />
-            <Button fx:id="payBtn" layoutX="270.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#toPayment" prefHeight="25.0" prefWidth="47.0" text="Pay" />
+            <Button fx:id="payBtn" layoutX="270.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#toPayment" prefHeight="25.0" prefWidth="47.0" text="Pay">
+               <font>
+                  <Font name="Berlin Sans FB" size="12.0" />
+               </font></Button>
          </children></Pane>
-      <Button fx:id="startBtn" layoutX="462.0" layoutY="372.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Start" />
-      <Button fx:id="stopBtn" layoutX="390.0" layoutY="372.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Stop" />
-      <Button fx:id="abortBtn" layoutX="192.0" layoutY="372.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Abort" />
-      <Button fx:id="backButton" layoutX="43.0" layoutY="372.0" mnemonicParsing="false" onMouseClicked="#backToMenu" prefHeight="25.0" prefWidth="78.0" text="Back" />
+      <Button fx:id="startBtn" layoutX="462.0" layoutY="372.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Start">
+         <font>
+            <Font name="Berlin Sans FB" size="12.0" />
+         </font></Button>
+      <Button fx:id="stopBtn" layoutX="390.0" layoutY="372.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Stop">
+         <font>
+            <Font name="Berlin Sans FB" size="12.0" />
+         </font></Button>
+      <Button fx:id="abortBtn" layoutX="192.0" layoutY="372.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Abort">
+         <font>
+            <Font name="Berlin Sans FB" size="12.0" />
+         </font></Button>
+      <Button fx:id="backButton" layoutX="43.0" layoutY="372.0" mnemonicParsing="false" onMouseClicked="#backToMenu" prefHeight="25.0" prefWidth="78.0" text="Back">
+         <font>
+            <Font name="Berlin Sans FB" size="12.0" />
+         </font></Button>
    </children>
 </Pane>

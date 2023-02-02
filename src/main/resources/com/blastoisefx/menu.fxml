@@ -14,21 +14,21 @@
             <Font name="Bookman Old Style Bold Italic" size="22.0" />
          </font>
       </Label>
-      <Button fx:id="toQueueBtn" layoutX="98.0" layoutY="242.0" mnemonicParsing="false" onMouseClicked="#toQueue" prefHeight="25.0" prefWidth="143.0" style="-fx-alignment: center;" text="Queue" textFill="#034d7e">
+      <Button fx:id="toQueueBtn" layoutX="98.0" layoutY="202.0" mnemonicParsing="false" onMouseClicked="#toQueue" prefHeight="25.0" prefWidth="143.0" style="-fx-alignment: center;" text="Queue">
          <font>
-            <Font name="Bookshelf Symbol 7" size="12.0" />
+            <Font name="Berlin Sans FB" size="14.0" />
          </font></Button>
-      <Button fx:id="toMachinesBtn" layoutX="98.0" layoutY="201.0" mnemonicParsing="false" onMouseClicked="#toMachines" prefHeight="27.0" prefWidth="143.0" style="-fx-alignment: center;" text="My Machines" textFill="#034d7e">
+      <Button fx:id="toMachinesBtn" layoutX="98.0" layoutY="243.0" mnemonicParsing="false" onMouseClicked="#toMachines" prefHeight="27.0" prefWidth="143.0" style="-fx-alignment: center;" text="My Machines">
          <font>
-            <Font name="Bookshelf Symbol 7" size="12.0" />
+            <Font name="Berlin Sans FB" size="14.0" />
          </font></Button>
-      <Button fx:id="toNotificationsBtn" layoutX="98.0" layoutY="285.0" mnemonicParsing="false" onMouseClicked="#toNotifications" prefHeight="25.0" prefWidth="143.0" style="-fx-alignment: center;" text="Notification" textFill="#034d7e">
+      <Button fx:id="toNotificationsBtn" layoutX="98.0" layoutY="285.0" mnemonicParsing="false" onMouseClicked="#toNotifications" prefHeight="25.0" prefWidth="143.0" style="-fx-alignment: center;" text="Notification">
          <font>
-            <Font name="Bookshelf Symbol 7" size="12.0" />
+            <Font name="Berlin Sans FB" size="14.0" />
          </font></Button>
-      <Button layoutX="98.0" layoutY="325.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="143.0" style="-fx-alignment: center;" text="Settings" textFill="#034d7e">
+      <Button layoutX="98.0" layoutY="325.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="143.0" style="-fx-alignment: center;" text="Settings">
          <font>
-            <Font name="Bookshelf Symbol 7" size="12.0" />
+            <Font name="Berlin Sans FB" size="14.0" />
          </font></Button>
       <ImageView fx:id="blastoisePic" fitHeight="151.0" fitWidth="150.0" layoutX="95.0" pickOnBounds="true" preserveRatio="true">
          <image>

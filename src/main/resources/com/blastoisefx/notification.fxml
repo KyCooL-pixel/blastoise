@@ -6,15 +6,17 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane fx:controller="com.blastoisefx.controller.NotificationController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="424.0" prefWidth="349.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="399.0" prefWidth="349.0" style="-fx-background-color: #AED6F1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blastoisefx.controller.NotificationController">
    <children>
-      <Label layoutX="130.0" layoutY="6.0" text="Notification">
+      <Label alignment="CENTER" layoutX="102.0" prefHeight="44.0" prefWidth="145.0" text="Notification" textAlignment="CENTER">
          <font>
-            <Font name="System Bold" size="17.0" />
+            <Font name="Bookman Old Style Bold Italic" size="20.0" />
          </font>
       </Label>
-      <ListView fx:id="notificationList" layoutX="35.0" layoutY="36.0" prefHeight="342.0" prefWidth="281.0" />
-      <Button fx:id="backButton" layoutX="149.0" layoutY="386.0" mnemonicParsing="false" text="Back" onMouseClicked="#backToMenu" />
+      <ListView fx:id="notificationList" layoutX="34.0" layoutY="42.0" prefHeight="316.0" prefWidth="281.0" />
+      <Button fx:id="backButton" layoutX="138.0" layoutY="367.0" mnemonicParsing="false" onMouseClicked="#backToMenu" prefHeight="25.0" prefWidth="73.0" text="Back">
+         <font>
+            <Font name="Berlin Sans FB" size="14.0" />
+         </font></Button>
    </children>
 </Pane>
