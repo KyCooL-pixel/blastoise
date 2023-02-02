@@ -15,6 +15,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import com.blastoisefx.model.MachineType;
+import com.blastoisefx.model.Notification;
 import com.blastoisefx.model.Machine;
 import com.blastoisefx.model.Washer;
 import com.blastoisefx.model.Dryer;
@@ -31,6 +32,8 @@ public class App extends Application {
     private static User currUser;
 
     private static ArrayList<MachineType<? extends Machine>> machineTypes = new ArrayList<>();
+    // notification stores here
+    private static ArrayList<Notification> notifications = new ArrayList<>();
     // UI
     private static Scene scene;
 
@@ -42,7 +45,7 @@ public class App extends Application {
         final int NUMBER_OF_DRYERS = 5;
         final int NUMBER_OF_IRONS = 2;
 
-        //Initiate machines
+        // Initiate machines
         ArrayList<Washer> washers = new ArrayList<>();
         ArrayList<Dryer> dryers = new ArrayList<>();
         ArrayList<Iron> irons = new ArrayList<>();
@@ -57,7 +60,7 @@ public class App extends Application {
             irons.add(new Iron());
         }
 
-        //Initiate machine types
+        // Initiate machine types
         machineTypes.add(new MachineType<Washer>(washers, 3, 1, 30, 10));
         machineTypes.add(new MachineType<Dryer>(dryers, 5, 2, 30, 12));
         machineTypes.add(new MachineType<Iron>(irons, 1, 1, 10, 10));
@@ -126,6 +129,10 @@ public class App extends Application {
 
     public static ArrayList<User> getUsers() {
         return users;
+    }
+
+    public static ArrayList<Notification> getNotifications() {
+        return notifications;
     }
 
     public static User getCurrUser() {

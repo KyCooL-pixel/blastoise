@@ -91,22 +91,20 @@ public class QueueController {
                     Message.showMessage("Queue for Wash Completed", "It's your turn now.",
                             "Go to My Machines for next step");
                     washAvailable.setText("--------------------");
-                    washQueue.poll();
-                    washQueue.poll();
+                    washQueue.clear();
                     isQueuedWash = false;
                     washQLengthShow();
-                    washLength.setText(0 + "");
+                    // washLength.setText(0 + "");
                 }
                 if (LocalTimeLabel.getText().equals(dryAvailable.getText())) {
                     dryAvailable.setText("NOW");
                     Message.showMessage("Queue for Dry Completed", "It's your turn now.",
                             "Go to My Machines for next step");
                     dryAvailable.setText("--------------------");
-                    dryQueue.poll();
-                    dryQueue.poll();
+                    dryQueue.clear();
                     isQueuedDry = false;
                     dryQLengthShow();
-                    dryLength.setText(0 + "");
+                    // dryLength.setText(0 + "");
                 }
             }
 
@@ -155,8 +153,8 @@ public class QueueController {
                 elapsedSecondsWash++;
                 washSeconds--;
                 if (washQueue.peek() != null && elapsedSecondsWash == washQueue.peek().getDuration()) {
-                    washQueue.poll();
                     elapsedSecondsWash = 0;
+                    washQueue.poll();
                     if (washQueueLengthOnceQueued > 0)
                         washQueueLengthOnceQueued--;
                     washQLengthShow();
@@ -184,8 +182,8 @@ public class QueueController {
                 elapsedSecondsDry++;
                 drySeconds--;
                 if (dryQueue.peek() != null && elapsedSecondsDry == dryQueue.peek().getDuration()) {
-                    dryQueue.poll();
                     elapsedSecondsDry = 0;
+                    dryQueue.poll();
                     if (dryQueueLengthOnceQueued > 0)
                         dryQueueLengthOnceQueued--;
                     dryQLengthShow();
@@ -290,5 +288,10 @@ public class QueueController {
     @FXML
     private void backToMainMenu() throws IOException {
         App.setRoot("menu");
+    }
+
+    @FXML
+    private void toMyMachines() throws IOException {
+        App.setRoot("myMachines");
     }
 }

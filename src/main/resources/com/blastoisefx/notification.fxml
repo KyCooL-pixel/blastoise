@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane fx:controller="com.blastoisefx.controller.NotificationController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="424.0" prefWidth="349.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="130.0" layoutY="6.0" text="Notification">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <ListView fx:id="notificationList" layoutX="35.0" layoutY="36.0" prefHeight="342.0" prefWidth="281.0" />
+      <Button fx:id="backButton" layoutX="149.0" layoutY="386.0" mnemonicParsing="false" text="Back" />
+   </children>
+</Pane>
