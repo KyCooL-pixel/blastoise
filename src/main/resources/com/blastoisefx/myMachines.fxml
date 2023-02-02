@@ -76,12 +76,12 @@
                   <Font name="Bookshelf Symbol 7" size="22.0" />
                </font>
             </Label>
-            <TextField layoutX="150.0" layoutY="12.0" prefHeight="25.0" prefWidth="112.0" />
+            <TextField fx:id="priceField" layoutX="150.0" layoutY="12.0" prefHeight="25.0" prefWidth="112.0" />
             <Button fx:id="payBtn" layoutX="270.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#toPayment" prefHeight="25.0" prefWidth="47.0" text="Pay" />
          </children></Pane>
-      <Button layoutX="462.0" layoutY="372.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Start" />
-      <Button layoutX="390.0" layoutY="372.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Stop" />
-      <Button layoutX="192.0" layoutY="372.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Abort" />
+      <Button fx:id="startBtn" layoutX="462.0" layoutY="372.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Start" />
+      <Button fx:id="stopBtn" layoutX="390.0" layoutY="372.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Stop" />
+      <Button fx:id="abortBtn" layoutX="192.0" layoutY="372.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Abort" />
       <Button fx:id="backButton" layoutX="43.0" layoutY="372.0" mnemonicParsing="false" onMouseClicked="#backToMenu" prefHeight="25.0" prefWidth="78.0" text="Back" />
    </children>
 </Pane>
