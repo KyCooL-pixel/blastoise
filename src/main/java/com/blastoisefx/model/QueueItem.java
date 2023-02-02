@@ -2,12 +2,14 @@ package com.blastoisefx.model;
 
 import java.time.LocalDateTime;
 
+
 public class QueueItem {
     private User user;
     private LocalDateTime startTime;
     private State state = State.WAITING;
     private Payment payment;
     private int duration;
+    private Machine machine;
 
 
     public enum State {
@@ -53,10 +55,22 @@ public class QueueItem {
     // ENDS HERE
 
     // CONSTRUCTOR
-    public QueueItem(User user, Payment payment, int duration) {
+    // public QueueItem(User user, Payment payment, int duration) {
+    //     this.user = user;
+    //     this.payment = payment;
+    //     this.startTime = LocalDateTime.now();
+    //     this.duration = duration;
+    // }
+
+    public QueueItem(User user, Payment payment, Machine machine) {
         this.user = user;
         this.payment = payment;
         this.startTime = LocalDateTime.now();
-        this.duration = duration;
+        this.machine = machine;
+        this.duration =10;
+    }
+
+    public Machine getMachine() {
+        return machine;
     }
 }

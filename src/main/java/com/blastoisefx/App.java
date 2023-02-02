@@ -1,11 +1,14 @@
 package com.blastoisefx;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -34,6 +37,9 @@ public class App extends Application {
     private static ArrayList<MachineType<? extends Machine>> machineTypes = new ArrayList<>();
     // notification stores here
     private static ArrayList<Notification> notifications = new ArrayList<>();
+    // Machines for user
+    private static ObservableList<Machine> myMachines = FXCollections.observableArrayList();
+    // private static ArrayList<Machine> myMachines = new ArrayList<>();
     // UI
     private static Scene scene;
 
@@ -141,6 +147,10 @@ public class App extends Application {
 
     public static void setCurrUser(User cu) {
         currUser = cu;
+    }
+
+    public static ObservableList<Machine> getMachines(){
+        return myMachines;
     }
 
 }

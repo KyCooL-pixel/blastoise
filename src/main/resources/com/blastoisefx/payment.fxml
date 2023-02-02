@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<Pane fx:controller="com.blastoisefx.controller.PaymentController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="305.0" prefWidth="413.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:controller="com.blastoisefx.controller.PaymentController" maxHeight="150" maxWidth="150" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150" prefWidth="150" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="28.0" layoutY="14.0" prefHeight="35.0" prefWidth="93.0" text="Payment">
          <font>

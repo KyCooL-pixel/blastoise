@@ -21,4 +21,9 @@ public class Notification {
     public boolean getSeen(){
         return seen;
     }
+
+    public void setSeen(boolean seen){
+        this.seen = seen;
+
+    }
 }

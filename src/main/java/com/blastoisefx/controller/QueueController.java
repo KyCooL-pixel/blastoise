@@ -7,8 +7,10 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import com.blastoisefx.App;
+import com.blastoisefx.model.Dryer;
 import com.blastoisefx.model.Payment;
 import com.blastoisefx.model.QueueItem;
+import com.blastoisefx.model.Washer;
 import com.blastoisefx.utils.Message;
 
 import javafx.animation.AnimationTimer;
@@ -91,6 +93,7 @@ public class QueueController {
                     Message.showMessage("Queue for Wash Completed", "It's your turn now.",
                             "Go to My Machines for next step");
                     washAvailable.setText("--------------------");
+                    addMachines(washQueue.poll());
                     washQueue.clear();
                     isQueuedWash = false;
                     washQLengthShow();
@@ -99,8 +102,9 @@ public class QueueController {
                 if (LocalTimeLabel.getText().equals(dryAvailable.getText())) {
                     dryAvailable.setText("NOW");
                     Message.showMessage("Queue for Dry Completed", "It's your turn now.",
-                            "Go to My Machines for next step");
+                    "Go to My Machines for next step");
                     dryAvailable.setText("--------------------");
+                    addMachines(dryQueue.poll());
                     dryQueue.clear();
                     isQueuedDry = false;
                     dryQLengthShow();
@@ -234,7 +238,7 @@ public class QueueController {
             washAvailable.setText("----------------");
         } else {
             washQueueLengthOnceQueued = washQueue.size();
-            QueueItem newItem = new QueueItem(App.getCurrUser(), new Payment(0, null), 10);
+            QueueItem newItem = new QueueItem(App.getCurrUser(), new Payment(0, null), new Washer());
             washQueue.add(newItem);
             washETATimeShow();
             isQueuedWash = true;
@@ -243,7 +247,7 @@ public class QueueController {
 
     @FXML
     private void washMockQueue() {
-        QueueItem newItem = new QueueItem(App.getCurrUser(), new Payment(0, null), 10);
+        QueueItem newItem = new QueueItem(App.getCurrUser(), new Payment(0, null), new Washer());
         washQueue.add(newItem);
         if (!isQueuedWash) {
             // add 1 to make up for the keyframe lag
@@ -265,7 +269,7 @@ public class QueueController {
             dryAvailable.setText("----------------");
         } else {
             dryQueueLengthOnceQueued = dryQueue.size();
-            QueueItem newItem = new QueueItem(App.getCurrUser(), new Payment(0, null), 10);
+            QueueItem newItem = new QueueItem(App.getCurrUser(), new Payment(0, null), new Dryer());
             dryQueue.add(newItem);
             dryETATimeShow();
             isQueuedDry = true;
@@ -274,7 +278,7 @@ public class QueueController {
 
     @FXML
     private void dryMockQueue() {
-        QueueItem newItem = new QueueItem(App.getCurrUser(), new Payment(0, null), 10);
+        QueueItem newItem = new QueueItem(App.getCurrUser(), new Payment(0, null), new Dryer());
         dryQueue.add(newItem);
         if (!isQueuedDry) {
             // add 1 to make up for the keyframe lag
@@ -293,5 +297,9 @@ public class QueueController {
     @FXML
     private void toMyMachines() throws IOException {
         App.setRoot("myMachines");
+    }
+
+    private void addMachines(QueueItem qItem) {
+        App.getMachines().add(qItem.getMachine());
     }
 }
