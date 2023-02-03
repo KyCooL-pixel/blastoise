@@ -65,9 +65,9 @@ public class App extends Application {
         machineTypes.add(new MachineType<Iron>(irons, 1, 1, 10, 10));
 
         var user = new User("ngiubing02@gmail.com", null);
-        machineTypes.get(0).getQueue().add(new QueueItem(user, null, 10));
-        machineTypes.get(0).getQueue().add(new QueueItem(user, null, 10));
-        machineTypes.get(0).getQueue().add(new QueueItem(user, null, 10));
+        machineTypes.get(0).addQueueItem(new QueueItem(user, null, 10));
+        machineTypes.get(0).addQueueItem(new QueueItem(user, null, 10));
+        machineTypes.get(0).addQueueItem(new QueueItem(user, null, 10));
     }
 
     @Override

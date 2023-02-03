@@ -68,6 +68,13 @@ public class MachineType<T extends Machine> {
     }
 
     public void addQueueItem(QueueItem queueItem) {
+        if(queueItem.getDuration() < MINIMUM_DURATION) {
+            queueItem.setDuration(MINIMUM_DURATION);
+        }
+
+        if(queue.size() > 0) {
+            queueItem.setStartTime(queue.get(queue.size() - 1).getEndTime());
+        }
         queue.add(queueItem);
     }
 

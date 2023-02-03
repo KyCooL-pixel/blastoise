@@ -43,6 +43,10 @@ public class QueueItem {
         return duration;
     }
 
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
     public LocalDateTime getEndTime() {
         return startTime.plusMinutes(duration);
     }
