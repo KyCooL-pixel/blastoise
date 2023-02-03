@@ -1,9 +1,7 @@
 package com.blastoisefx.model;
 
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
 
 public class QueueItem {
     private User user;
@@ -52,7 +50,7 @@ public class QueueItem {
     }
 
     public int getWaitingTime() {
-        int waitingTime = (int) (Duration.between(LocalDateTime.now(), getEndTime()).getSeconds() / 60.0);
+        int waitingTime = (int) (Duration.between(getStartTime(), getEndTime()).getSeconds() / 60.0);
         if (waitingTime < 0) {
             return 0;
         }
