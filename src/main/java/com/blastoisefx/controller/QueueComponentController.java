@@ -78,7 +78,7 @@ public class QueueComponentController implements Initializable {
 
   public void tick() {
     queueItemCountField.setText(String.valueOf(machineType.getQueue().size()));
-    waitingTimeField.setText(String.valueOf(machineType.getDuration()));
+    waitingTimeField.setText(String.valueOf(machineType.getWaitingTime()));
 
     int duration = 0;
     var queue = machineType.getQueue();

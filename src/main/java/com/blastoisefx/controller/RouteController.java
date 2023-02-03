@@ -1,16 +1,11 @@
 package com.blastoisefx.controller;
 
 import com.blastoisefx.App;
-
 import java.io.IOException;
 
-import javafx.event.Event;
-import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Control;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 public class RouteController {

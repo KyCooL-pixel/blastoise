@@ -4,24 +4,17 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import com.blastoisefx.App;
 import com.blastoisefx.model.Payment;
 import com.blastoisefx.model.QueueItem;
 import com.blastoisefx.model.User;
-import com.blastoisefx.utils.Message;
 
 import javafx.animation.Animation;
-import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.animation.Animation.Status;
-import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -35,22 +28,6 @@ import javafx.util.Duration;
 public class QueueController implements Initializable {
     final double MILLISECONDS_PER_FRAME_IN_30_FPS = Math.ceil(1000 / 30);
 
-    // Initiate a queue here
-    private Queue<QueueItem> washQueue = new LinkedList<QueueItem>();
-
-    // declare an elapsed variable here that will let the queuItem know it should be
-    // ended
-    // once it reaches the duration
-    private int elapsedSeconds = 0;
-
-    // set a queue length variable once user pressed queue
-    private int queueLengthOnceQueued;
-    // these two need to take from model
-    private Integer seconds = 1;
-
-    // this keep track if user is already queueing or not
-    private boolean isQueued = false;
-
     // normal fxml stuff
     // @FXML
     // private Label countDownLabel;
@@ -62,36 +39,13 @@ public class QueueController implements Initializable {
 
     @FXML
     private GridPane queueComponentPane;
-    // private Button addTimeButton;
-    // @FXML
-    // private Button createQueueItemBtn;
-    // @FXML
-    // private Label ETALabel;
-    // @FXML
-    // private Label qLength;
-    // @FXML
-    // private Button mockQueueBtn;
-
-    // Shares timeline
-    // Timeline time = new Timeline();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         var machineTypes = App.getMachineTypes();
 
-        QueueComponentController[] queueComponentControllers = new QueueComponentController[machineTypes.size()];
+        ArrayList<QueueComponentController> queueComponentControllers = new ArrayList<>();
 
-        // convert the following to for loop
-        // machineTypes.forEach(machineType -> {
-        // FXMLLoader loader = App.getFXMLLoader("queueComponent");
-        // QueueComponentController controller = new QueueComponentController(machineType);
-        // loader.setController(controller);
-        // try {
-        // queueComponentPane.add(loader.load(), 0, machineTypes.indexOf(machineType));
-        // } catch (IOException e) {
-        // e.printStackTrace();
-        // }
-        // });
         for (int i = 0; i < machineTypes.size(); i++) {
             FXMLLoader loader = App.getFXMLLoader("queueComponent");
             QueueComponentController controller = new QueueComponentController(machineTypes.get(i));
@@ -108,6 +62,7 @@ public class QueueController implements Initializable {
                         Duration.millis(MILLISECONDS_PER_FRAME_IN_30_FPS),
                         event -> {
                             setCurrentTime();
+                            queueComponentControllers.forEach(queueComponentController -> queueComponentController.tick());
                         }));
         time.setCycleCount(Animation.INDEFINITE);
         time.play();

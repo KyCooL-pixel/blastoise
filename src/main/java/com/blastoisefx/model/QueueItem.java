@@ -1,6 +1,9 @@
 package com.blastoisefx.model;
 
+import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 
 public class QueueItem {
     private User user;
@@ -9,13 +12,11 @@ public class QueueItem {
     private Payment payment;
     private int duration;
 
-
     public enum State {
         WAITING,
         OPERATING,
         FINISHED
     }
-
 
     // GETTERS AND SETTERS FOR EVERYTHING STARTS HERE
     public State getState() {
@@ -44,6 +45,15 @@ public class QueueItem {
 
     public LocalDateTime getEndTime() {
         return startTime.plusMinutes(duration);
+    }
+
+    public int getWaitingTime() {
+        int waitingTime = (int) (Duration.between(LocalDateTime.now(), getEndTime()).getSeconds() / 60.0);
+        if (waitingTime < 0) {
+            return 0;
+        }
+
+        return waitingTime;
     }
 
     public void setStartTime(LocalDateTime startTime) {

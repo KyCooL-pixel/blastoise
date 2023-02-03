@@ -16,8 +16,11 @@ public class MachineType<T extends Machine> {
 
     public MachineType(ArrayList<T> machines, double basePrice, double addOnPrice, int minimumDuration,
             int addonDurationDivision) {
-        this.name = machines.getClass().getSimpleName();
+        if (machines.size() == 0)
+            throw new IllegalArgumentException("MachineType must have at least one machine");
+
         this.machines = machines;
+        this.name = machines.get(0).getClass().getSimpleName();
         this.queue = new ArrayList<>();
         this.BASE_PRICE = basePrice;
         this.ADD_ON_PRICE = addOnPrice;
@@ -37,6 +40,18 @@ public class MachineType<T extends Machine> {
             }
         }
         return totalDuration;
+    }
+
+    public int getWaitingTime() {
+        int totalWaitingTime = 0;
+        for (QueueItem queueItem : queue) {
+            if (queueItem.getState() != QueueItem.State.FINISHED) {
+                totalWaitingTime += queueItem.getWaitingTime();
+            } else {
+                break;
+            }
+        }
+        return totalWaitingTime;
     }
 
     public double getPrice(int Duration) {
