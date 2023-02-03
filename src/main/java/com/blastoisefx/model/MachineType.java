@@ -18,6 +18,7 @@ public class MachineType<T extends Machine> {
             int addonDurationDivision) {
         this.name = machines.getClass().getSimpleName();
         this.machines = machines;
+        this.queue = new ArrayList<>();
         this.BASE_PRICE = basePrice;
         this.ADD_ON_PRICE = addOnPrice;
         this.MINIMUM_DURATION = minimumDuration;

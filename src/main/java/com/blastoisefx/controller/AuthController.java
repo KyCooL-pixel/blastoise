@@ -8,8 +8,11 @@ import com.blastoisefx.model.User;
 import com.blastoisefx.utils.Message;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 public class AuthController {
     @FXML
@@ -19,17 +22,44 @@ public class AuthController {
     @FXML
     private Label signInLabel;
 
+    private ClientController clientController;
+
+    public AuthController() {
+    }
+
+    public AuthController(ClientController clientController) {
+        this.clientController = clientController;
+    }
+
     @FXML
-    private void Login() throws IOException {
+    private void Login(MouseEvent event) throws IOException {
         String email = emailValue.getText();
         String password = passwordValue.getText();
         User currUser = Auth.validate(email, password);
-        if (currUser != null) {
-            App.setCurrUser(currUser);
-            App.setRoot("queue");
-        } else {
+
+        if (currUser == null) {
             Message.showMessage("ERROR", "WRONG CREDENTIALS", "Please enter correct info or sign up if new user");
+            return;
         }
+
+        Object source = event.getSource();
+        if (!(source instanceof Control)) {
+            Message.showMessage("ERROR", "ERROR", "Something went wrong");
+            return;
+        }
+
+        if (clientController != null) {
+            clientController.setUser(currUser);
+
+            Control control = (Control) source;
+            FXMLLoader loader = App.getFXMLLoader("client");
+            loader.setController(clientController);
+            control.getScene().setRoot(loader.load());
+            return;
+        }
+
+        App.setCurrUser(currUser);
+        App.setRoot("queue");
     }
 
     @FXML
@@ -53,13 +83,13 @@ public class AuthController {
         }
     }
 
-    private void clearResetEmail(){
+    private void clearResetEmail() {
         emailValue.clear();
         emailValue.setPromptText("Please enter a valid email*");
         emailValue.setStyle("-fx-prompt-text-fill: #f50c0c");
     }
 
-    private void clearResetPassword(){
+    private void clearResetPassword() {
         passwordValue.clear();
         passwordValue.setPromptText("Password must be at least 8 characters long*");
         passwordValue.setStyle("-fx-prompt-text-fill: #f50c0c");

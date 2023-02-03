@@ -15,6 +15,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import com.blastoisefx.model.MachineType;
+import com.blastoisefx.model.QueueItem;
 import com.blastoisefx.model.Machine;
 import com.blastoisefx.model.Washer;
 import com.blastoisefx.model.Dryer;
@@ -30,7 +31,7 @@ public class App extends Application {
     private static ArrayList<User> users = new ArrayList<User>();
     private static User currUser;
 
-    private static ArrayList<MachineType<? extends Machine>> machineTypes = new ArrayList<>();
+    private static ArrayList<MachineType<? extends Machine>> machineTypes;
     // UI
     private static Scene scene;
 
@@ -58,10 +59,15 @@ public class App extends Application {
         }
 
         //Initiate machine types
+        machineTypes = new ArrayList<>();
         machineTypes.add(new MachineType<Washer>(washers, 3, 1, 30, 10));
         machineTypes.add(new MachineType<Dryer>(dryers, 5, 2, 30, 12));
         machineTypes.add(new MachineType<Iron>(irons, 1, 1, 10, 10));
 
+        var user = new User("ngiubing02@gmail.com", null);
+        machineTypes.get(0).getQueue().add(new QueueItem(user, null, 10));
+        machineTypes.get(0).getQueue().add(new QueueItem(user, null, 10));
+        machineTypes.get(0).getQueue().add(new QueueItem(user, null, 10));
     }
 
     @Override
@@ -115,8 +121,12 @@ public class App extends Application {
         scene.setRoot(loadFXML(fxml));
     }
 
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+    public static FXMLLoader getFXMLLoader(String fxml) {
+        return new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+    }
+
+    public static Parent loadFXML(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = getFXMLLoader(fxml);
         return fxmlLoader.load();
     }
 
