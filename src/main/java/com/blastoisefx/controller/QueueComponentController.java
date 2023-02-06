@@ -1,17 +1,15 @@
 package com.blastoisefx.controller;
 
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.ResourceBundle;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.AnchorPane;
 import javafx.fxml.Initializable;
 
 import com.blastoisefx.model.Machine;
@@ -45,10 +43,11 @@ public class QueueComponentController implements Initializable {
     listView.setCellFactory(param -> new ListCell<QueueItem>() {
       private final Label userEmailLabel = new Label();
       private final Label endTimeLabel = new Label();
-      private final HBox layout = new HBox(userEmailLabel, endTimeLabel);
+      private final AnchorPane layout = new AnchorPane(userEmailLabel, endTimeLabel);
 
       {
-        layout.setSpacing(10);
+        AnchorPane.setLeftAnchor(userEmailLabel, 2.0);
+        AnchorPane.setRightAnchor(endTimeLabel, 2.0);
       }
 
       @Override
@@ -59,11 +58,10 @@ public class QueueComponentController implements Initializable {
           endTimeLabel.setText(null);
           setGraphic(null);
         } else {
-          System.out.println(item.getUser());
-          System.out.println(item.getEndTime());
           userEmailLabel.setText(item.getUser().getEmail());
-          endTimeLabel.setText(item.getEndTime().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)));
+          endTimeLabel.setText(String.valueOf(item.getWaitingTime()));
           setGraphic(layout);
+          setStyle("-fx-background-color: blue");
         }
       }
     });
