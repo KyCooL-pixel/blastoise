@@ -1,17 +1,21 @@
 # Blastoise
 This is an assignment made for the course TTTK2023 Object Oriented Software Engineering
 
+## Explanation
+Now there's a timeline, where each tick (1/30 seconds), the system will run through the queue and check if anything's need to be updated, terminated according to current time(LocalDateTime.now()).
+The 'add client' button will emulate a phone from user's perspective, they can add themselves to a queue and make a payment (just an alert, or message box, or a modal). Then it will reflect on the dashboard.
+
 ## TODO
-1) research on css stylesheets for javafx
-2) research on log4j (logger library)
-3) make the main screen logo transparent background
-4)  maybe can refactor the logics in queucontroller to a queuelist model
-
-## KY TODO:
-1) We dont need a countDown timer implementation, just abuse the local date time function in java
-2) Research on how to pop the item in the queue once the duration of the machine is reached
-3) Dynamically adds queueItem to a UI list
-
+1. Dynamically add component (machine id and status + listview) for each machine in the dashboard
+2. Using ObservableList, link the date in machine queue to listview
+3. Add a callback to observable list (inside constructor), to trigger an update when QueueItem Status changed
+4. In the updateItem callback for list cell, make the item change background color and text color (if necessary) for different status of queueitem
+5. Add button to call for different machines inside client phone
+6. (optional) allow the user to set time they want to queue
+    - assginment algorithm in machine types need to be changed
+    - add a datetime picker in client
+7. Add a screen to client to view machine status and lock/unlock it.
+8. Fix client Auth screen ratio size issue
 
 ## A queueItem will terminate when
 1) Wash completed && idle for a period of time
