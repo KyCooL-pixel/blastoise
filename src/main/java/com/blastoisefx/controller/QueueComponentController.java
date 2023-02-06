@@ -15,7 +15,6 @@ import javafx.scene.layout.HBox;
 import javafx.fxml.Initializable;
 
 import com.blastoisefx.model.Machine;
-import com.blastoisefx.model.MachineType;
 import com.blastoisefx.model.QueueItem;
 
 public class QueueComponentController implements Initializable {
@@ -34,18 +33,15 @@ public class QueueComponentController implements Initializable {
   @FXML
   private ListView<QueueItem> listView;
 
-  private MachineType<? extends Machine> machineType;
+  private Machine machine;
 
-  ObservableList<QueueItem> items;
-
-  public QueueComponentController(MachineType<? extends Machine> machineType) {
-    this.machineType = machineType;
+  public QueueComponentController(Machine machine) {
+    this.machine = machine;
   }
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    items = FXCollections.observableList(machineType.getQueue());
-    listView.setItems(items);
+    listView.setItems(machine.getQueue());
     listView.setCellFactory(param -> new ListCell<QueueItem>() {
       private final Label userEmailLabel = new Label();
       private final Label endTimeLabel = new Label();
@@ -72,20 +68,20 @@ public class QueueComponentController implements Initializable {
       }
     });
 
-    title.setText(machineType.getName());
     tick();
   }
 
   public void tick() {
-    queueItemCountField.setText(String.valueOf(machineType.getQueue().size()));
-    waitingTimeField.setText(String.valueOf(machineType.getWaitingTime()));
+    queueItemCountField.setText(String.valueOf(machine.getQueue().size()));
 
     int duration = 0;
-    var queue = machineType.getQueue();
+    var queue = machine.getQueue();
     if (queue.size() > 0) {
       duration = queue.get(0).getDuration();
     }
     currentQueueItemDurationField.setText(String.valueOf(duration));
+
+    machine.checkQueue(LocalDateTime.now());
   }
 
 }

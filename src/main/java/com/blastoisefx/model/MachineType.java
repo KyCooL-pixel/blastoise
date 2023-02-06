@@ -1,6 +1,10 @@
 package com.blastoisefx.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
 
 public class MachineType<T extends Machine> {
     private String name;
@@ -8,8 +12,7 @@ public class MachineType<T extends Machine> {
     private double BASE_PRICE;
     private double ADD_ON_PRICE;
 
-    private ArrayList<QueueItem> queue;
-    private ArrayList<T> machines;
+    private ObservableList<T> machines;
 
     private final int MINIMUM_DURATION;
     private final int ADD_ON_DURATION_DIVISION;
@@ -19,9 +22,8 @@ public class MachineType<T extends Machine> {
         if (machines.size() == 0)
             throw new IllegalArgumentException("MachineType must have at least one machine");
 
-        this.machines = machines;
+        this.machines = FXCollections.observableList(machines);
         this.name = machines.get(0).getClass().getSimpleName();
-        this.queue = new ArrayList<>();
         this.BASE_PRICE = basePrice;
         this.ADD_ON_PRICE = addOnPrice;
         this.MINIMUM_DURATION = minimumDuration;
@@ -32,53 +34,28 @@ public class MachineType<T extends Machine> {
         return name;
     }
 
-    public int getDuration() {
-        int totalDuration = 0;
-        for (QueueItem queueItem : queue) {
-            if (queueItem.getState() != QueueItem.State.FINISHED) {
-                totalDuration += queueItem.getDuration();
-            }
-        }
-        return totalDuration;
-    }
-
-    public int getWaitingTime() {
-        int totalWaitingTime = 0;
-        for (QueueItem queueItem : queue) {
-            if (queueItem.getState() != QueueItem.State.FINISHED) {
-                totalWaitingTime += queueItem.getWaitingTime();
-            } else {
-                break;
-            }
-        }
-        return totalWaitingTime;
-    }
-
     public double getPrice(int Duration) {
         return BASE_PRICE
                 + (ADD_ON_PRICE * Math.ceil((Duration - MINIMUM_DURATION) / (double) ADD_ON_DURATION_DIVISION));
     }
 
-    public ArrayList<QueueItem> getQueue() {
-        return queue;
-    }
-
-    public ArrayList<T> getMachines() {
+    public ObservableList<T> getMachines() {
         return machines;
     }
 
-    public void addQueueItem(QueueItem queueItem) {
-        if(queueItem.getDuration() < MINIMUM_DURATION) {
-            queueItem.setDuration(MINIMUM_DURATION);
+    public Machine getFastestAvailableMachine() {
+        Machine fastestMachine = null;
+        LocalDateTime fastestTime = LocalDateTime.MIN;
+        for (T machine : machines) {
+            if(machine.getEndTime().isAfter(fastestTime)){
+                fastestMachine = machine;
+                fastestTime = machine.getEndTime();
+            }
         }
-
-        if(queue.size() > 0) {
-            queueItem.setStartTime(queue.get(queue.size() - 1).getEndTime());
-        }
-        queue.add(queueItem);
+        return fastestMachine;
     }
 
-    public QueueItem removeQueueItem() {
-        return queue.remove(queue.size() - 1);
+    public void addQueueItem(QueueItem queueItem) {
+        getFastestAvailableMachine().addToQueue(queueItem);
     }
 }

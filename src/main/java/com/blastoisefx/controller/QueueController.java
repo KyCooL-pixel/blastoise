@@ -48,7 +48,7 @@ public class QueueController implements Initializable {
 
         for (int i = 0; i < machineTypes.size(); i++) {
             FXMLLoader loader = App.getFXMLLoader("queueComponent");
-            QueueComponentController controller = new QueueComponentController(machineTypes.get(i));
+            QueueComponentController controller = new QueueComponentController(machineTypes.get(i).getMachines().get(0));
             loader.setController(controller);
             try {
                 queueComponentPane.add(loader.load(), i, 0);
@@ -87,4 +87,6 @@ public class QueueController implements Initializable {
     public void addWasherQueue(User user, Payment payment, int duration) {
         App.getMachineTypes().get(0).addQueueItem(new QueueItem(user, payment, duration));;
     }
+
+
 }

@@ -1,24 +1,71 @@
 package com.blastoisefx.model;
 
+import java.time.LocalDateTime;
+
+import com.blastoisefx.model.QueueItem.State;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 public abstract class Machine {
-    public static enum Status {
-      IDLE,
-      OPERATING,
-      LOCKED,
+  private ObservableList<QueueItem> queue;
+
+  public static enum Status {
+    IDLE,
+    OPERATING,
+    LOCKED,
+  }
+
+  private Status status;
+
+  public Machine() {
+    this.status = Status.IDLE;
+    this.queue = FXCollections.observableArrayList();
+  }
+
+  public Status getStatus() {
+    return status;
+  }
+
+  public void checkQueue(LocalDateTime currentTime) {
+    if (queue.size() < 1) {
+      setStatus(Status.IDLE);
+      return;
     }
 
-    private Status status;
-
-    public Machine() {
-      this.status = Status.IDLE;
+    QueueItem item = queue.get(0);
+    if (status == Status.OPERATING) {
+      if (currentTime.isAfter(item.getEndTime())) {
+        setStatus(Status.IDLE);
+        item.setState(State.FINISHED);
+        queue.remove(0);
+        return;
+      }
     }
 
-    public Status getStatus() {
-      return status;
+    if (item.getState() == State.WAITING) {
+      item.setState(State.OPERATING);
+      setStatus(Status.OPERATING);
+    }
+  }
+
+  public void addToQueue(QueueItem item) {
+    queue.add(item);
+  }
+
+  public ObservableList<QueueItem> getQueue() {
+    return queue;
+  }
+
+  public void setStatus(Status status) {
+    this.status = status;
+  }
+
+  public LocalDateTime getEndTime() {
+    if (queue.size() == 0) {
+      return LocalDateTime.now();
     }
 
-    public void setStatus(Status status) {
-      this.status = status;
-    }
+    return queue.get(queue.size() - 1).getEndTime();
+  }
 }
-
