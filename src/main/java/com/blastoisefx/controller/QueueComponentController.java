@@ -1,85 +1,70 @@
 package com.blastoisefx.controller;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.fxml.Initializable;
 
+import com.blastoisefx.App;
 import com.blastoisefx.model.Machine;
-import com.blastoisefx.model.QueueItem;
+import com.blastoisefx.model.MachineType;
 
 public class QueueComponentController implements Initializable {
   @FXML
-  private Label currentQueueItemDurationField;
+  private Label addOnPriceLabel;
 
   @FXML
-  private Label queueItemCountField;
+  private Label basePriceLabel;
 
   @FXML
-  private Label title;
+  private FlowPane machinesFlowPane;
+
+  // @FXML
+  // private VBox machinesVBox;
 
   @FXML
-  private Label waitingTimeField;
+  private Label titleLabel;
 
-  @FXML
-  private ListView<QueueItem> listView;
+  private MachineType<? extends Machine> machineType;
+  ArrayList<MachineComponentController> machineControllers = new ArrayList<>();
 
-  private Machine machine;
-
-  public QueueComponentController(Machine machine) {
-    this.machine = machine;
+  public QueueComponentController(MachineType<? extends Machine> machineType) {
+    this.machineType = machineType;
   }
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    listView.setItems(machine.getQueue());
-    listView.setCellFactory(param -> new ListCell<QueueItem>() {
-      private final Label userEmailLabel = new Label();
-      private final Label endTimeLabel = new Label();
-      private final AnchorPane layout = new AnchorPane(userEmailLabel, endTimeLabel);
+    titleLabel.setText(machineType.getName());
+    var basePrice =  String.format("RM %.2f", machineType.getBasePrice());
+    var addOnPrice =  String.format("RM %.2f", machineType.getAddOnPrice());
+    basePriceLabel.setText(basePrice);
+    addOnPriceLabel.setText(addOnPrice);
 
-      {
-        AnchorPane.setLeftAnchor(userEmailLabel, 2.0);
-        AnchorPane.setRightAnchor(endTimeLabel, 2.0);
+    for (Machine machine : machineType.getMachines()) {
+      FXMLLoader loader = App.getFXMLLoader("machineComponent");
+      var controller = new MachineComponentController(machine);
+      loader.setController(controller);
+      machineControllers.add(controller);
+      try {
+        machinesFlowPane.getChildren().add(loader.load());
+      } catch (Exception e) {
+        System.out.println("Error loading machine component");
       }
+    }
 
-      @Override
-      protected void updateItem(QueueItem item, boolean empty) {
-        super.updateItem(item, empty);
-        if (empty || item == null || item.getUser() == null || item.getEndTime() == null) {
-          userEmailLabel.setText(null);
-          endTimeLabel.setText(null);
-          setGraphic(null);
-        } else {
-          userEmailLabel.setText(item.getUser().getEmail());
-          endTimeLabel.setText(String.valueOf(item.getWaitingTime()));
-          setGraphic(layout);
-          setStyle("-fx-background-color: blue");
-        }
-      }
-    });
-
-    tick();
   }
 
   public void tick() {
-    queueItemCountField.setText(String.valueOf(machine.getQueue().size()));
-
-    int duration = 0;
-    var queue = machine.getQueue();
-    if (queue.size() > 0) {
-      duration = queue.get(0).getDuration();
+    LocalDateTime currentTime = LocalDateTime.now();
+    for (MachineComponentController controller : machineControllers) {
+      controller.tick(currentTime);
     }
-    currentQueueItemDurationField.setText(String.valueOf(duration));
-
-    machine.checkQueue(LocalDateTime.now());
   }
-
 }

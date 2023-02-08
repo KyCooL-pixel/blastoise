@@ -58,4 +58,12 @@ public class MachineType<T extends Machine> {
     public void addQueueItem(QueueItem queueItem) {
         getFastestAvailableMachine().addToQueue(queueItem);
     }
+
+    public double getBasePrice() {
+        return BASE_PRICE;
+    }
+
+    public double getAddOnPrice() {
+      return ADD_ON_PRICE;
+    }
 }

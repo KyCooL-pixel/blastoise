@@ -48,8 +48,9 @@ public class QueueController implements Initializable {
 
         for (int i = 0; i < machineTypes.size(); i++) {
             FXMLLoader loader = App.getFXMLLoader("queueComponent");
-            QueueComponentController controller = new QueueComponentController(machineTypes.get(i).getMachines().get(0));
+            QueueComponentController controller = new QueueComponentController(machineTypes.get(i));
             loader.setController(controller);
+            queueComponentControllers.add(controller);
             try {
                 queueComponentPane.add(loader.load(), i, 0);
             } catch (IOException e) {
@@ -62,7 +63,7 @@ public class QueueController implements Initializable {
                         Duration.millis(MILLISECONDS_PER_FRAME_IN_30_FPS),
                         event -> {
                             setCurrentTime();
-                            queueComponentControllers.forEach(queueComponentController -> queueComponentController.tick());
+                            queueComponentControllers.forEach(QueueComponentController::tick);
                         }));
         time.setCycleCount(Animation.INDEFINITE);
         time.play();
