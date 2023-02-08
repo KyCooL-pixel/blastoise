@@ -45,9 +45,9 @@ public class MachineType<T extends Machine> {
 
     public Machine getFastestAvailableMachine() {
         Machine fastestMachine = null;
-        LocalDateTime fastestTime = LocalDateTime.MIN;
+        LocalDateTime fastestTime = LocalDateTime.MAX;
         for (T machine : machines) {
-            if(machine.getEndTime().isAfter(fastestTime)){
+            if(machine.getEndTime().isBefore(fastestTime)){
                 fastestMachine = machine;
                 fastestTime = machine.getEndTime();
             }
