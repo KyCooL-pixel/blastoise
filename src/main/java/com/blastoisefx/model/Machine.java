@@ -17,10 +17,12 @@ public abstract class Machine {
   }
 
   private Status status;
+  private String id;
 
-  public Machine() {
+  public Machine(String id) {
     this.status = Status.IDLE;
     this.queue = FXCollections.observableArrayList();
+    this.id = id;
   }
 
   public Status getStatus() {
@@ -67,5 +69,9 @@ public abstract class Machine {
     }
 
     return queue.get(queue.size() - 1).getEndTime();
+  }
+
+  public String getId() {
+    return id;
   }
 }

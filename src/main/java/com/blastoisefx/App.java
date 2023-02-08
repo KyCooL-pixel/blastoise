@@ -49,13 +49,13 @@ public class App extends Application {
         ArrayList<Iron> irons = new ArrayList<>();
 
         for (int i = 1; i <= NUMBER_OF_WASHERS; i++) {
-            washers.add(new Washer());
+            washers.add(new Washer(String.valueOf(i)));
         }
         for (int i = 1; i <= NUMBER_OF_DRYERS; i++) {
-            dryers.add(new Dryer());
+            dryers.add(new Dryer(String.valueOf(i)));
         }
         for (int i = 1; i <= NUMBER_OF_IRONS; i++) {
-            irons.add(new Iron());
+            irons.add(new Iron(String.valueOf(i)));
         }
 
         //Initiate machine types
@@ -73,7 +73,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         stage.getIcons().add(new Image(App.class.getResourceAsStream("pokemon-blastoise-nicknames.jpg")));
-        scene = new Scene(loadFXML("main"), 640, 480);
+        scene = new Scene(loadFXML("queue"), 640, 480);
         stage.setScene(scene);
         stage.show();
     }
