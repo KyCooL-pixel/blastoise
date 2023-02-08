@@ -50,10 +50,6 @@ public class QueueItem {
     }
 
     public long getWaitingTime() {
-        if (state != State.WAITING) {
-            return 0;
-        }
-
         return ChronoUnit.SECONDS.between(LocalDateTime.now(), getEndTime());
     }
 
