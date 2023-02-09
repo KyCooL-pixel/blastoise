@@ -1,3 +1,4 @@
+
 package com.blastoisefx.model;
 
 import java.time.LocalDateTime;
