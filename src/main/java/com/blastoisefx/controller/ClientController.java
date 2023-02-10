@@ -112,14 +112,18 @@ public class ClientController implements Initializable {
     gridPane.setVgap(5);
     if (method == Method.ONLINE_BANKING) {
       gridPane.add(new Label("User Name"), 0, 1);
-      gridPane.add(new TextField(), 1, 1);
+      gridPane.add(new TextField("xinjie@xinjie"), 1, 1);
       gridPane.add(new Label("User Password"), 0, 2);
-      gridPane.add(new PasswordField(), 1, 2);
+      PasswordField pass1 = new PasswordField();
+      pass1.setText("12345678");
+      gridPane.add(pass1, 1, 2);
     } else {
       gridPane.add(new Label("Phone Number"), 0, 1);
-      gridPane.add(new TextField(), 1, 1);
+      gridPane.add(new TextField("011234567"), 1, 1);
       gridPane.add(new Label("PIN number"), 0, 2);
-      gridPane.add(new PasswordField(), 1, 2);
+      PasswordField pass2 = new PasswordField();
+      pass2.setText("12345678");
+      gridPane.add(pass2, 1, 2);
     }
     gridPane.add(totalPrice, 0, 0);
     alert.getDialogPane().setContent(gridPane);
