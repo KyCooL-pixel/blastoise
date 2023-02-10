@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="750.0" spacing="10.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blastoisefx.controller.QueueController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="750.0" spacing="10.0" style="-fx-background-color: #7FB3D5;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blastoisefx.controller.QueueController">
    <children>
       <GridPane fx:id="queueComponentPane" VBox.vgrow="ALWAYS">
         <columnConstraints>
@@ -24,15 +24,18 @@
       </GridPane>
       <Label fx:id="localTimeLabel" text="00:00:00:00">
          <font>
-            <Font size="21.0" />
+            <Font name="Arial Black" size="21.0" />
          </font>
       </Label>
       <HBox alignment="BOTTOM_RIGHT" prefWidth="699.0">
          <children>
-            <Button fx:id="addClientButton" mnemonicParsing="false" onAction="#addClient" text="Add Client">
+            <Button fx:id="addClientButton" mnemonicParsing="false" onAction="#addClient" prefHeight="23.0" prefWidth="114.0" text="Add Client">
                <HBox.margin>
                   <Insets bottom="8.0" right="8.0" />
                </HBox.margin>
+               <font>
+                  <Font name="Berlin Sans FB" size="13.0" />
+               </font>
             </Button>
          </children>
       </HBox>

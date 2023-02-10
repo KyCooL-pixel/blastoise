@@ -59,7 +59,7 @@ public class AuthController {
         }
 
         App.setCurrUser(currUser);
-        App.setRoot("queue");
+        App.setRoot("queue",710, 530);
     }
 
     @FXML

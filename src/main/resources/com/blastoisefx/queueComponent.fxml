@@ -27,12 +27,24 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Base Price" />
-            <Label text="Add On Price" GridPane.rowIndex="1" />
+            <Label text="Base Price">
+               <font>
+                  <Font name="Arial Bold Italic" size="12.0" />
+               </font></Label>
+            <Label text="Add On Price" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Arial Bold Italic" size="12.0" />
+               </font></Label>
             <Label text=":" GridPane.columnIndex="1" />
             <Label text=":" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label fx:id="basePriceLabel" text="basePrice" GridPane.columnIndex="2" />
-            <Label fx:id="addOnPriceLabel" text="addOnPrice" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label fx:id="basePriceLabel" text="basePrice" GridPane.columnIndex="2">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font></Label>
+            <Label fx:id="addOnPriceLabel" text="addOnPrice" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font></Label>
          </children>
          <VBox.margin>
             <Insets />

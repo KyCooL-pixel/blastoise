@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -34,6 +35,7 @@ public class App extends Application {
     private static ArrayList<MachineType<? extends Machine>> machineTypes;
     // UI
     private static Scene scene;
+    private static Stage _stage;
 
     @Override
     public void init() {
@@ -73,9 +75,10 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         stage.getIcons().add(new Image(App.class.getResourceAsStream("pokemon-blastoise-nicknames.jpg")));
-        scene = new Scene(loadFXML("queue"), 640, 480);
+        scene = new Scene(loadFXML("main"), 370, 407);
         stage.setScene(scene);
         stage.show();
+        _stage = stage;
     }
 
     @Override
@@ -117,9 +120,13 @@ public class App extends Application {
         return machineTypes;
     }
 
-    public static void setRoot(String fxml) throws IOException {
+    public static void setRoot(String fxml, double width, double height) throws IOException {
         scene.setRoot(loadFXML(fxml));
+        Window window = scene.getWindow();
+        window.setWidth(width);
+        window.setHeight(height);
     }
+
 
     public static FXMLLoader getFXMLLoader(String fxml) {
         return new FXMLLoader(App.class.getResource(fxml + ".fxml"));

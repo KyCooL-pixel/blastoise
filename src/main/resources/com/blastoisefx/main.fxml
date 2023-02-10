@@ -15,7 +15,7 @@
       </Label>
    </top>
    <bottom>
-      <Label alignment="CENTER" prefHeight="39.0" prefWidth="210.0" text="App that changes queueing,ever" BorderPane.alignment="CENTER">
+      <Label alignment="CENTER" prefHeight="39.0" prefWidth="230.0" text="App that changes queueing forever" BorderPane.alignment="CENTER">
          <font>
             <Font name="Berlin Sans FB Demi Bold" size="14.0" />
          </font></Label>
