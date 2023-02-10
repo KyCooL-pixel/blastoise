@@ -39,13 +39,16 @@ public abstract class Machine {
     }
 
     QueueItem item = queue.get(0);
-    if (status == Status.OPERATING) {
-      if (currentTime.isAfter(item.getOperationEndTime())) {
-        setStatus(Status.IDLE);
-        item.setState(State.FINISHED);
-        queue.remove(0);
-        return item;
-      }
+    if (status == Status.OPERATING && currentTime.isAfter(item.getOperationEndTime())) {
+      setStatus(Status.LOCKED);
+      item.setState(State.FINISHED);
+      return item;
+    }
+
+    if(status == Status.LOCKED && currentTime.isAfter(item.getOperationEndTime().plusSeconds(lockDuration))) {
+      setStatus(Status.IDLE);
+      item.setState(State.FINISHED);
+      return queue.remove(item) ? item : null;
     }
 
     if (item.getState() == State.WAITING) {
@@ -53,6 +56,7 @@ public abstract class Machine {
       setStatus(Status.OPERATING);
       return null;
     }
+
     return null;
   }
 
@@ -77,7 +81,7 @@ public abstract class Machine {
     return queue.get(queue.size() - 1).getOperationEndTime();
   }
 
-  public long getQueueItemWaitingTime(int index){
+  public long getQueueItemWaitingTime(int index) {
     if (index < 0 || index >= queue.size()) {
       throw new IndexOutOfBoundsException();
     }
@@ -88,18 +92,14 @@ public abstract class Machine {
   }
 
   private long getQueueItemWaitingTimeRecursive(int index, LocalDateTime currentTime) {
-    if(index < 0 || index > queue.size()) {
-      return 0;
-    }
-
-    if (index == 0) {
-      return ChronoUnit.SECONDS.between(currentTime, queue.get(index).getOperationEndTime());
+    if (index < 0 || index > queue.size()) {
+      // return -1 to fix time calcuation overlapping
+      return -1;
     }
 
     return ChronoUnit.SECONDS.between(currentTime, queue.get(index).getOperationEndTime().plusSeconds(lockDuration))
-     + getQueueItemWaitingTimeRecursive(index - 1, currentTime);
+        + getQueueItemWaitingTimeRecursive(index - 1, currentTime);
   }
-
 
   public String getId() {
     return id;

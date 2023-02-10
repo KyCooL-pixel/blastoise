@@ -29,7 +29,6 @@ public class MachineComponentController implements Initializable {
 
   private Machine machine;
 
-
   public MachineComponentController(Machine machine) {
     this.machine = machine;
   }
@@ -66,14 +65,23 @@ public class MachineComponentController implements Initializable {
 
   }
 
-  public void tick(LocalDateTime currentTime){
+  public void tick(LocalDateTime currentTime) {
     QueueItem q = machine.checkQueue(currentTime);
-    if(q!=null){
-      for(ClientController c: App.getClientControllers()){
-      if(c.getUser() == q.getUser())
-        c.showMessage("testing","testing","completed");
+    if (q != null) {
+      for (ClientController c : App.getClientControllers()) {
+        if (c.getUser() != q.getUser()) {
+          continue;
+        }
+
+        if (machine.getStatus() == Machine.Status.LOCKED) {
+          // Finished Washing
+          c.showMessage("Notification", "Machine Operation Finished", "Please remove your clothes from the machine before the lock is released");
+        } else {
+          // Unlocked
+          c.showMessage("Notificatrion", "Machine Unlocked", "The machine is now unlocked");
+        }
       }
-    };
+    }
     queueListView.refresh();
   }
 }
