@@ -81,13 +81,20 @@ public class ClientController implements Initializable {
     // Scene paymentScene = new Scene(loader.load(), 335, 600);
     // stage.setScene(paymentScene);
 
-    var duration = getDuration();
-    var price = duration * 123123;
+    try {
+      var duration = getDuration();
+      var price = duration * 123123;
+      var paymentMethod = getPaymentMethod();
 
     queueController.addWasherQueue(
         user,
         new Payment(price, paymentPart(getPaymentMethod())),
         50);
+    } catch (NoSuchElementException e) {
+      // Ignore as user clicks cancel
+    } catch (NullPointerException | NumberFormatException e) {
+      Message.showMessage("Error", e.getClass().getSimpleName(), "Please enter a valid number.");
+    }
   }
 
 
@@ -95,15 +102,12 @@ public class ClientController implements Initializable {
     stage = thisStage;
   }
 
-  private Method getPaymentMethod() {
+  private Method getPaymentMethod() throws NoSuchElementException {
     ChoiceDialog<Method> dialog = new ChoiceDialog<Method>(Method.ONLINE_BANKING, Method.values());
     dialog.setTitle("Payment");
     dialog.setHeaderText("Choose your preferred payment method");
     //dialog.getDialogPane().getChildren().add(new TextField("Hello world"))
     var result = dialog.showAndWait();
-    while (!result.isPresent()) {
-      result = dialog.showAndWait();
-    }
     return result.get();
   }
 
@@ -137,13 +141,6 @@ public class ClientController implements Initializable {
     dialog.setHeaderText("Enter extra duration if you require extra time for your laundry, if not just press OK");
     dialog.setContentText("Please enter any extra duration for your laundry (in seconds):");
     var result = dialog.showAndWait();
-    try {
-      while (!result.isPresent() || Double.parseDouble(result.get()) < 0) {
-        result = dialog.showAndWait();
-      }
-    } catch (NumberFormatException e) {
-      result = dialog.showAndWait();
-    }
     return Double.parseDouble(result.get());
   }
 

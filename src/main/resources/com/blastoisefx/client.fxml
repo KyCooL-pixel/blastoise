@@ -58,7 +58,10 @@
                <font>
                   <Font name="Berlin Sans FB" size="12.0" />
                </font></Label>
-            <Label fx:id="emailLabel" text="&lt;email&gt;" />
+            <Label fx:id="emailLabel" text="&lt;email&gt;">
+               <padding>
+                  <Insets right="10.0" />
+               </padding></Label>
          </children>
       </HBox>
    </bottom>
