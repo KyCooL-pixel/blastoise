@@ -2,7 +2,6 @@
 package com.blastoisefx.model;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 
 public class QueueItem {
     private User user;
