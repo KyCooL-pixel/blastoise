@@ -34,9 +34,13 @@ public class MachineType<T extends Machine> {
         return name;
     }
 
-    public double getPrice(int Duration) {
+    public double getPrice(int duration) {
+        if (duration < MINIMUM_DURATION)
+            return BASE_PRICE;
+        else
+
         return BASE_PRICE
-                + (ADD_ON_PRICE * Math.ceil((Duration - MINIMUM_DURATION) / (double) ADD_ON_DURATION_DIVISION));
+                + (ADD_ON_PRICE * Math.ceil((duration - MINIMUM_DURATION) / (double) ADD_ON_DURATION_DIVISION));
     }
 
     public ObservableList<T> getMachines() {
