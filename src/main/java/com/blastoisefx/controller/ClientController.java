@@ -67,43 +67,40 @@ public class ClientController implements Initializable {
     // Scene paymentScene = new Scene(loader.load(), 335, 600);
     // stage.setScene(paymentScene);
 
-    var duration = getDuration();
-    var price = duration * 123123;
+    try {
+      var duration = getDuration();
+      var price = duration * 123123;
+      var paymentMethod = getPaymentMethod();
 
-    queueController.addWasherQueue(
-        user,
-        new Payment(price, getPaymentMethod()),
-        50);
+      queueController.addWasherQueue(
+          user,
+          new Payment(price,paymentMethod),
+          50);
+    } catch (NoSuchElementException e) {
+      // Ignore as user clicks cancel
+    } catch (NullPointerException | NumberFormatException e) {
+      Message.showMessage("Error", e.getClass().getSimpleName(), "Please enter a valid number.");
+    }
   }
 
   public void setStage(Stage thisStage) {
     stage = thisStage;
   }
 
-  private Method getPaymentMethod() {
+  private Method getPaymentMethod() throws NoSuchElementException {
     ChoiceDialog<Method> dialog = new ChoiceDialog<Method>(Method.ONLINE_BANKING, Method.values());
     dialog.setTitle("Payment");
     dialog.setHeaderText("Choose your preferred payment method");
     var result = dialog.showAndWait();
-    while (!result.isPresent()) {
-      result = dialog.showAndWait();
-    }
     return result.get();
   }
 
-  private double getDuration() {
+  private double getDuration() throws NullPointerException, NumberFormatException {
     TextInputDialog dialog = new TextInputDialog("0.0");
     dialog.setTitle("Extra duration for laundry");
     dialog.setHeaderText("Enter extra duration if you require extra time for your laundry, if not just press OK");
     dialog.setContentText("Please enter any extra duration for your laundry (in seconds):");
     var result = dialog.showAndWait();
-    try {
-      while (!result.isPresent() || Double.parseDouble(result.get()) < 0) {
-        result = dialog.showAndWait();
-      }
-    } catch (NumberFormatException e) {
-      result = dialog.showAndWait();
-    }
     return Double.parseDouble(result.get());
   }
 
