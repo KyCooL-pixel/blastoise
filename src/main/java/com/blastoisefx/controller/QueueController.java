@@ -95,6 +95,4 @@ public class QueueController implements Initializable {
         Machine availableMachine = App.getMachineTypes().get(0).getFastestAvailableMachine();
         return (availableMachine.getQueue().size() > 0) ? (int) (availableMachine.getQueue().get(availableMachine.getQueue().size()-1).getWaitingTime() + duration) :duration;
     }
-
-
 }
