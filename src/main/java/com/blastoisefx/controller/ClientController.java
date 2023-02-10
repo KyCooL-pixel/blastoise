@@ -2,6 +2,7 @@ package com.blastoisefx.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -88,7 +89,7 @@ public class ClientController implements Initializable {
 
     queueController.addWasherQueue(
         user,
-        new Payment(price, paymentPart(getPaymentMethod())),
+        new Payment(price, paymentPart(paymentMethod)),
         50);
     } catch (NoSuchElementException e) {
       // Ignore as user clicks cancel
@@ -113,6 +114,8 @@ public class ClientController implements Initializable {
 
   private Method paymentPart(Method method){
     Alert alert = new Alert(AlertType.CONFIRMATION);
+    alert.setTitle("Payment");
+    alert.setHeaderText("Confirm your payment");
     totalPrice = new Label("Mock Price here");
     GridPane gridPane = new GridPane();
     gridPane.setVgap(5);
