@@ -52,6 +52,8 @@ public class ClientController implements Initializable {
   @FXML
   private Label totalPrice;
 
+  public Image image;
+
   private QueueController queueController;
 
   private Stage stage;
@@ -113,6 +115,7 @@ public class ClientController implements Initializable {
   }
 
   private Method paymentPart(Method method){
+    // Image image = new Image("/qrCode.png");
     Alert alert = new Alert(AlertType.CONFIRMATION);
     alert.setTitle("Payment");
     alert.setHeaderText("Confirm your payment");
@@ -129,9 +132,10 @@ public class ClientController implements Initializable {
 
     }
     else{
-      Image image = new Image("/qrCode.png");
-      ImageView qrImageView = new ImageView(image);
-      gridPane.getChildren().add(qrImageView);
+      gridPane.add(new Label("Phone Number"),0,1); 
+      gridPane.add(new TextField(),1,1); 
+      gridPane.add(new Label("PIN number"),0,2); 
+      gridPane.add(new PasswordField(),1,2); 
     }
     alert.getDialogPane().setContent(gridPane);
     alert.showAndWait();
