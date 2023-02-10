@@ -1,5 +1,6 @@
 package com.blastoisefx.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
@@ -15,6 +16,7 @@ import com.blastoisefx.utils.Message;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceDialog;
@@ -45,9 +47,12 @@ public class ClientController implements Initializable {
   @FXML
   private FlowPane buttonsFlowPane;
 
+  @FXML
+  private Button myMachineButton;
+
   public Image image;
 
-  private Stage stage;
+  private Scene scene;
 
   private User user;
 
@@ -84,10 +89,18 @@ public class ClientController implements Initializable {
       button.setPrefWidth(155);
       buttonsFlowPane.getChildren().add(0, button);
     });
-  }
 
-  public void setStage(Stage thisStage) {
-    stage = thisStage;
+    myMachineButton.setOnAction(event -> {
+      var scene = myMachineButton.getScene();
+      var stage = (Stage) scene.getWindow();
+      var loader = App.getFXMLLoader("clientViewMachines");
+      loader.setController(new ClientViewMachinesController(scene, user));
+      try {
+        stage.setScene(new Scene(loader.load(), 334, 400));
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    });
   }
 
   private Method getPaymentMethod() throws NoSuchElementException {
@@ -141,5 +154,4 @@ public class ClientController implements Initializable {
   public void showMessage(String head, String body, String text) {
     Message.showMessage(head, body, text);
   }
-
 }
