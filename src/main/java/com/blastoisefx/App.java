@@ -39,8 +39,8 @@ public class App extends Application {
     public void init() {
         loadUsers();
 
-        final int NUMBER_OF_WASHERS = 3;
-        final int NUMBER_OF_DRYERS = 3;
+        final int NUMBER_OF_WASHERS = 2;
+        final int NUMBER_OF_DRYERS = 2;
         final int NUMBER_OF_IRONS = 2;
 
         //Initiate machines
