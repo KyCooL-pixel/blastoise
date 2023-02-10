@@ -17,11 +17,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class ClientController implements Initializable {
@@ -36,6 +47,9 @@ public class ClientController implements Initializable {
 
   @FXML
   private Label title;
+
+  @FXML
+  private Label totalPrice;
 
   private QueueController queueController;
 
@@ -72,9 +86,10 @@ public class ClientController implements Initializable {
 
     queueController.addWasherQueue(
         user,
-        new Payment(price, getPaymentMethod()),
+        new Payment(price, paymentPart(getPaymentMethod())),
         50);
   }
+
 
   public void setStage(Stage thisStage) {
     stage = thisStage;
@@ -84,11 +99,36 @@ public class ClientController implements Initializable {
     ChoiceDialog<Method> dialog = new ChoiceDialog<Method>(Method.ONLINE_BANKING, Method.values());
     dialog.setTitle("Payment");
     dialog.setHeaderText("Choose your preferred payment method");
+    //dialog.getDialogPane().getChildren().add(new TextField("Hello world"))
     var result = dialog.showAndWait();
     while (!result.isPresent()) {
       result = dialog.showAndWait();
     }
     return result.get();
+  }
+
+  private Method paymentPart(Method method){
+    Alert alert = new Alert(AlertType.CONFIRMATION);
+    totalPrice = new Label("Mock Price here");
+    GridPane gridPane = new GridPane();
+    gridPane.setVgap(5);
+    gridPane.add(totalPrice,0,0);
+    
+    if(method == Method.ONLINE_BANKING){
+      gridPane.add(new Label("User Name"),0,1); 
+      gridPane.add(new TextField(),1,1); 
+      gridPane.add(new Label("User Password"),0,2); 
+      gridPane.add(new PasswordField(),1,2); 
+
+    }
+    else{
+      Image image = new Image("/qrCode.png");
+      ImageView qrImageView = new ImageView(image);
+      gridPane.getChildren().add(qrImageView);
+    }
+    alert.getDialogPane().setContent(gridPane);
+    alert.showAndWait();
+    return method;
   }
 
   private double getDuration() {

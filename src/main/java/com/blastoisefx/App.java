@@ -78,6 +78,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        System.out.println("Working Directory = " + System.getProperty("user.dir"));
         stage.getIcons().add(new Image(App.class.getResourceAsStream("pokemon-blastoise-nicknames.jpg")));
         scene = new Scene(loadFXML("main"), 370, 407);
         stage.setScene(scene);
