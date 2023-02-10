@@ -82,7 +82,7 @@ public class QueueController implements Initializable {
         clientController.setStage(clientStage);
 
         loader.setController(new AuthController(clientController));
-        Scene main = new Scene(loader.load(), 335, 600);
+        Scene main = new Scene(loader.load(), 334, 400);
         clientStage.setScene(main);
         clientStage.show();
     }

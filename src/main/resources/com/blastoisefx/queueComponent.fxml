@@ -13,7 +13,7 @@
    <children>
       <Label fx:id="titleLabel" contentDisplay="CENTER" prefHeight="35.0" prefWidth="107.0" text="Title">
          <font>
-            <Font name="System Bold" size="24.0" />
+            <Font name="Berlin Sans FB Bold" size="24.0" />
          </font>
       </Label>
       <GridPane prefHeight="50.0" prefWidth="231.0" VBox.vgrow="SOMETIMES">
@@ -29,21 +29,21 @@
          <children>
             <Label text="Base Price">
                <font>
-                  <Font name="Arial Bold Italic" size="12.0" />
+                  <Font name="Arial Bold Italic" size="13.0" />
                </font></Label>
             <Label text="Add On Price" GridPane.rowIndex="1">
                <font>
-                  <Font name="Arial Bold Italic" size="12.0" />
+                  <Font name="Arial Bold Italic" size="13.0" />
                </font></Label>
             <Label text=":" GridPane.columnIndex="1" />
             <Label text=":" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label fx:id="basePriceLabel" text="basePrice" GridPane.columnIndex="2">
                <font>
-                  <Font name="Arial" size="12.0" />
+                  <Font name="Arial" size="13.0" />
                </font></Label>
             <Label fx:id="addOnPriceLabel" text="addOnPrice" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <font>
-                  <Font name="Arial" size="12.0" />
+                  <Font name="Arial" size="13.0" />
                </font></Label>
          </children>
          <VBox.margin>
