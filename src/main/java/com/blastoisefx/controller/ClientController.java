@@ -82,7 +82,8 @@ public class ClientController implements Initializable {
 
   private Method getPaymentMethod() {
     ChoiceDialog<Method> dialog = new ChoiceDialog<Method>(Method.ONLINE_BANKING, Method.values());
-
+    dialog.setTitle("Payment");
+    dialog.setHeaderText("Choose your preferred payment method");
     var result = dialog.showAndWait();
     while (!result.isPresent()) {
       result = dialog.showAndWait();
@@ -92,7 +93,9 @@ public class ClientController implements Initializable {
 
   private double getDuration() {
     TextInputDialog dialog = new TextInputDialog("0.0");
-    dialog.setContentText("Please enter the duration of your laundry (in seconds):");
+    dialog.setTitle("Extra duration for laundry");
+    dialog.setHeaderText("Enter extra duration if you require extra time for your laundry, if not just press OK");
+    dialog.setContentText("Please enter any extra duration for your laundry (in seconds):");
     var result = dialog.showAndWait();
     try {
       while (!result.isPresent() || Double.parseDouble(result.get()) < 0) {
