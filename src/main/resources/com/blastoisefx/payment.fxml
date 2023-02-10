@@ -33,7 +33,7 @@
             <TextField layoutX="135.0" layoutY="80.0" prefHeight="25.0" prefWidth="192.0" />
          </children>
       </Pane>
-      <Button fx:id="doneButton" layoutX="252.0" layoutY="489.0" mnemonicParsing="false" onMouseClicked="#backToMachines" text="DONE" />
+      <Button fx:id="doneButton" layoutX="252.0" layoutY="489.0" mnemonicParsing="false"  text="DONE" />
       <ImageView fx:id="eWalletQR" fitHeight="176.0" fitWidth="192.0" layoutX="180.0" layoutY="280.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@qrcode.jpeg" />
