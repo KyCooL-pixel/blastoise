@@ -24,7 +24,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
@@ -45,10 +44,8 @@ public class ClientController implements Initializable {
 
   @FXML
   private FlowPane buttonsFlowPane;
-  
-  public Image image;
 
-  private QueueController queueController;
+  public Image image;
 
   private Stage stage;
 
@@ -115,12 +112,17 @@ public class ClientController implements Initializable {
     gridPane.setVgap(5);
     gridPane.add(totalPrice, 0, 0);
 
-    }
-    else{
-      gridPane.add(new Label("Phone Number"),0,1); 
-      gridPane.add(new TextField(),1,1); 
-      gridPane.add(new Label("PIN number"),0,2); 
-      gridPane.add(new PasswordField(),1,2); 
+    if (method == Method.ONLINE_BANKING) {
+      gridPane.add(new Label("User Name"), 0, 1);
+      gridPane.add(new TextField(), 1, 1);
+      gridPane.add(new Label("User Password"), 0, 2);
+      gridPane.add(new PasswordField(), 1, 2);
+      gridPane.add(totalPrice, 0, 0);
+    } else {
+      gridPane.add(new Label("Phone Number"), 0, 1);
+      gridPane.add(new TextField(), 1, 1);
+      gridPane.add(new Label("PIN number"), 0, 2);
+      gridPane.add(new PasswordField(), 1, 2);
     }
     alert.getDialogPane().setContent(gridPane);
     alert.showAndWait();
@@ -130,10 +132,12 @@ public class ClientController implements Initializable {
   private int getDuration(MachineType<? extends Machine> machineType) {
     TextInputDialog dialog = new TextInputDialog("0");
     dialog.setTitle("Add on duration for laundry");
-    dialog.setHeaderText(String.format("The minimum duration required is %d seconds Enter extra duration if you require extra time for your laundry, if not just press OK", machineType.getDefaultDuration()));
+    dialog.setHeaderText(String.format(
+        "The minimum duration required is %d seconds Enter extra duration if you require extra time for your laundry, if not just press OK",
+        machineType.getDefaultDuration()));
     dialog.setContentText("Please enter any add on duration for your laundry (in seconds):");
     var result = dialog.showAndWait();
-    return machineType.getDefaultDuration() +  Integer.parseInt(result.get());
+    return machineType.getDefaultDuration() + Integer.parseInt(result.get());
   }
 
   public void showMessage(String head, String body, String text) {
