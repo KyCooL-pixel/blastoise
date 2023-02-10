@@ -46,12 +46,8 @@ public class QueueItem {
         this.duration = duration;
     }
 
-    public LocalDateTime getEndTime() {
+    public LocalDateTime getOperationEndTime() {
         return startTime.plusSeconds(duration);
-    }
-
-    public long getWaitingTime() {
-        return ChronoUnit.SECONDS.between(LocalDateTime.now(), getEndTime());
     }
 
     public void setStartTime(LocalDateTime startTime) {

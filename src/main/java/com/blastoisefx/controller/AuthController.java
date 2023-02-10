@@ -1,6 +1,8 @@
 package com.blastoisefx.controller;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import com.blastoisefx.App;
 import com.blastoisefx.model.Auth;
@@ -9,12 +11,13 @@ import com.blastoisefx.utils.Message;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-public class AuthController {
+public class AuthController implements Initializable{
     @FXML
     private TextField emailValue;
     @FXML
@@ -29,6 +32,11 @@ public class AuthController {
 
     public AuthController(ClientController clientController) {
         this.clientController = clientController;
+    }
+
+    public void initialize(URL location, ResourceBundle resources) {
+        emailValue.setText("me@me.com");
+        passwordValue.setText("me@me.com");
     }
 
     @FXML
