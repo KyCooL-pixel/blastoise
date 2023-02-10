@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 public class ClientController implements Initializable {
   @FXML
@@ -28,6 +29,8 @@ public class ClientController implements Initializable {
   private Label title;
 
   private QueueController queueController;
+
+  private Stage stage;
 
   private User user;
 
@@ -48,12 +51,17 @@ public class ClientController implements Initializable {
 
   @FXML
   void addWasherQueue(ActionEvent event) {
+    stage.setScene(null);
     queueController.addWasherQueue(
       user,
       new Payment(50, Payment.Method.ONLINE_BANKING),
       50
     );
   }
+
+  public void setStage(Stage thisStage){
+    stage = thisStage;
+}
 
 
 

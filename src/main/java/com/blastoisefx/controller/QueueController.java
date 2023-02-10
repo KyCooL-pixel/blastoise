@@ -79,6 +79,7 @@ public class QueueController implements Initializable {
         Stage clientStage = new Stage();
         FXMLLoader loader = App.getFXMLLoader("auth");
         ClientController clientController = new ClientController(this, null);
+        clientController.setStage(clientStage);
 
         loader.setController(new AuthController(clientController));
         Scene main = new Scene(loader.load(), 335, 600);
