@@ -1,28 +1,23 @@
 package com.blastoisefx.controller;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.blastoisefx.App;
+import com.blastoisefx.model.Machine;
+import com.blastoisefx.model.MachineType;
 import com.blastoisefx.model.Payment;
+import com.blastoisefx.model.QueueItem;
 import com.blastoisefx.model.User;
-import com.blastoisefx.model.Washer;
 import com.blastoisefx.model.Payment.Method;
 import com.blastoisefx.utils.Message;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.event.ActionEvent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceDialog;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -31,17 +26,13 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class ClientController implements Initializable {
   @FXML
   private BorderPane root;
-
-  @FXML
-  private Button addWasherQueueButton;
 
   @FXML
   private Label emailLabel;
@@ -52,6 +43,9 @@ public class ClientController implements Initializable {
   @FXML
   private Label totalPrice;
 
+  @FXML
+  private FlowPane buttonsFlowPane;
+  
   public Image image;
 
   private QueueController queueController;
@@ -61,7 +55,6 @@ public class ClientController implements Initializable {
   private User user;
 
   public ClientController(QueueController queueController, User user) {
-    this.queueController = queueController;
     this.user = user;
   }
 
@@ -69,37 +62,36 @@ public class ClientController implements Initializable {
     this.user = user;
   }
 
-  public User getUser(){
+  public User getUser() {
     return user;
   }
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     emailLabel.setText(user.getEmail());
+    App.getMachineTypes().forEach(machineType -> {
+      var button = new Button(machineType.getName());
+      button.setOnAction(event -> {
+        try {
+          var duration = getDuration(machineType);
+          var price = machineType.getPrice(duration);
+          var paymentMethod = getPaymentMethod();
+
+          machineType.addQueueItem(new QueueItem(
+              user,
+              new Payment(price, paymentPart(paymentMethod)),
+              duration));
+        } catch (NoSuchElementException e) {
+          // Ignore as user clicks cancel
+        } catch (NullPointerException | NumberFormatException e) {
+          Message.showMessage("Error", e.getClass().getSimpleName(), "Please enter a valid number.");
+        }
+      });
+      button.setPrefHeight(25);
+      button.setPrefWidth(155);
+      buttonsFlowPane.getChildren().add(0, button);
+    });
   }
-
-  @FXML
-  void addWasherQueue(ActionEvent event) throws IOException {
-    // FXMLLoader loader = App.getFXMLLoader("payment");
-    // Scene paymentScene = new Scene(loader.load(), 335, 600);
-    // stage.setScene(paymentScene);
-
-    try {
-      var duration = getDuration();
-      var price = duration * 123123;
-      var paymentMethod = getPaymentMethod();
-
-    queueController.addWasherQueue(
-        user,
-        new Payment(price, paymentPart(paymentMethod)),
-        50);
-    } catch (NoSuchElementException e) {
-      // Ignore as user clicks cancel
-    } catch (NullPointerException | NumberFormatException e) {
-      Message.showMessage("Error", e.getClass().getSimpleName(), "Please enter a valid number.");
-    }
-  }
-
 
   public void setStage(Stage thisStage) {
     stage = thisStage;
@@ -109,26 +101,19 @@ public class ClientController implements Initializable {
     ChoiceDialog<Method> dialog = new ChoiceDialog<Method>(Method.ONLINE_BANKING, Method.values());
     dialog.setTitle("Payment");
     dialog.setHeaderText("Choose your preferred payment method");
-    //dialog.getDialogPane().getChildren().add(new TextField("Hello world"))
+    // dialog.getDialogPane().getChildren().add(new TextField("Hello world"))
     var result = dialog.showAndWait();
     return result.get();
   }
 
-  private Method paymentPart(Method method){
-    // Image image = new Image("/qrCode.png");
+  private Method paymentPart(Method method) {
     Alert alert = new Alert(AlertType.CONFIRMATION);
     alert.setTitle("Payment");
     alert.setHeaderText("Confirm your payment");
     totalPrice = new Label("Mock Price here");
     GridPane gridPane = new GridPane();
     gridPane.setVgap(5);
-    gridPane.add(totalPrice,0,0);
-    
-    if(method == Method.ONLINE_BANKING){
-      gridPane.add(new Label("User Name"),0,1); 
-      gridPane.add(new TextField(),1,1); 
-      gridPane.add(new Label("User Password"),0,2); 
-      gridPane.add(new PasswordField(),1,2); 
+    gridPane.add(totalPrice, 0, 0);
 
     }
     else{
@@ -142,17 +127,17 @@ public class ClientController implements Initializable {
     return method;
   }
 
-  private double getDuration() {
-    TextInputDialog dialog = new TextInputDialog("0.0");
-    dialog.setTitle("Extra duration for laundry");
-    dialog.setHeaderText("Enter extra duration if you require extra time for your laundry, if not just press OK");
-    dialog.setContentText("Please enter any extra duration for your laundry (in seconds):");
+  private int getDuration(MachineType<? extends Machine> machineType) {
+    TextInputDialog dialog = new TextInputDialog("0");
+    dialog.setTitle("Add on duration for laundry");
+    dialog.setHeaderText(String.format("The minimum duration required is %d seconds Enter extra duration if you require extra time for your laundry, if not just press OK", machineType.getDefaultDuration()));
+    dialog.setContentText("Please enter any add on duration for your laundry (in seconds):");
     var result = dialog.showAndWait();
-    return Double.parseDouble(result.get());
+    return machineType.getDefaultDuration() +  Integer.parseInt(result.get());
   }
 
-  public void showMessage(String head, String body, String text){
-    Message.showMessage(head,body,text);
+  public void showMessage(String head, String body, String text) {
+    Message.showMessage(head, body, text);
   }
 
 }
