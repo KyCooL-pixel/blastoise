@@ -6,31 +6,24 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane
-   maxHeight="-Infinity"
-   maxWidth="-Infinity"
-   minHeight="-Infinity"
-   minWidth="-Infinity"
-   prefHeight="400.0"
-   prefWidth="600.0"
-   xmlns="http://javafx.com/javafx/19"
-   xmlns:fx="http://javafx.com/fxml/1"
-   fx:controller="com.blastoisefx.controller.RouteController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="407.0" prefWidth="370.0" style="-fx-background-color: #7FB3D5;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blastoisefx.controller.RouteController">
    <top>
-      <Label text="Blastoise" BorderPane.alignment="CENTER">
+      <Label alignment="CENTER" contentDisplay="BOTTOM" prefHeight="43.0" prefWidth="213.0" text="Blastoise" textAlignment="CENTER" BorderPane.alignment="CENTER">
          <font>
-            <Font name="Comic Sans MS" size="25.0" />
+            <Font name="Berlin Sans FB Demi Bold" size="48.0" />
          </font>
       </Label>
    </top>
    <bottom>
-      <Label text="App that changes queueing,ever" BorderPane.alignment="CENTER" />
+      <Label alignment="CENTER" prefHeight="39.0" prefWidth="210.0" text="App that changes queueing,ever" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Berlin Sans FB Demi Bold" size="14.0" />
+         </font></Label>
    </bottom>
    <center>
-      <ImageView fx:id="logo" fitHeight="263.0" fitWidth="261.0" onMouseClicked="#toLogin"
-         pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+      <ImageView fx:id="logo" fitHeight="449.0" fitWidth="315.0" onMouseClicked="#toLogin" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
          <image>
-            <Image url="@Blastoise.gif" />
+            <Image url="@blastoise_icon-removebg-preview.png" />
          </image>
       </ImageView>
    </center>

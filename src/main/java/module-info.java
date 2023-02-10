@@ -1,7 +1,7 @@
 module com.blastoisefx {
     requires transitive javafx.graphics;
+    requires transitive javafx.fxml;
     requires javafx.controls;
-    requires javafx.fxml;
 
     opens com.blastoisefx to javafx.fxml;
     opens com.blastoisefx.controller to javafx.fxml;

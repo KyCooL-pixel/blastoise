@@ -5,44 +5,62 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blastoisefx.controller.AuthController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="362.0" prefWidth="334.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <Label text="Login" textAlignment="CENTER" BorderPane.alignment="CENTER">
          <font>
-            <Font name="System Bold" size="26.0" />
+            <Font name="Berlin Sans FB Bold" size="37.0" />
          </font>
+         <BorderPane.margin>
+            <Insets top="10.0" />
+         </BorderPane.margin>
       </Label>
    </top>
    <center>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="238.0" prefWidth="314.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox>
+            <VBox maxWidth="246.0" prefHeight="42.0" prefWidth="246.0">
                <children>
-                  <Label text="Email" />
-                  <TextField fx:id="emailValue" promptText="Enter your email" />
+                  <Label text="Email">
+                     <font>
+                        <Font name="Arial" size="13.0" />
+                     </font></Label>
+                  <TextField fx:id="emailValue" prefHeight="26.0" prefWidth="218.0" promptText="Enter your email">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font></TextField>
                </children>
             </VBox>
-            <VBox layoutX="10.0" layoutY="10.0">
+            <VBox maxWidth="245.0" prefHeight="43.0" prefWidth="245.0">
                <children>
-                  <Label text="Password" />
-                  <PasswordField fx:id="passwordValue" promptText="Password must be at least 8 characters long" />
+                  <Label text="Password">
+                     <font>
+                        <Font name="Arial" size="13.0" />
+                     </font></Label>
+                  <PasswordField fx:id="passwordValue" prefHeight="26.0" prefWidth="253.0" promptText="Password must be at least 8 characters long">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font></PasswordField>
                </children>
             </VBox>
-            <ToolBar prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-spacing: 10;">
-              <items>
-                <Button fx:id="loginButton" mnemonicParsing="false" onMouseClicked="#Login" text="Login" translateX="70.0" />
-                  <Button fx:id="signUpButton" layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#SignUp" text="Sign Up" translateX="70.0" />
-              </items>
-            </ToolBar>
+            <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="10.0">
+               <children>
+                  <Button fx:id="loginButton" mnemonicParsing="false" onMouseClicked="#Login" prefHeight="26.0" prefWidth="70.0" text="Login" />
+                  <Button fx:id="signUpButton" mnemonicParsing="false" onMouseClicked="#SignUp" prefHeight="26.0" prefWidth="70.0" text="Sign Up" />
+               </children>
+            </FlowPane>
          </children>
          <BorderPane.margin>
-            <Insets left="170.0" right="170.0" top="40.0" />
+            <Insets />
          </BorderPane.margin>
       </VBox>
    </center>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
 </BorderPane>
