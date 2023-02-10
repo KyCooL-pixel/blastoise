@@ -69,7 +69,6 @@
       <FlowPane fx:id="buttonsFlowPane" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefWrapLength="200.0" vgap="32.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="myMachine" mnemonicParsing="false" prefHeight="25.0" prefWidth="155.0" text="View My Machine" />
-            <Button fx:id="viewNoti" mnemonicParsing="false" prefHeight="25.0" prefWidth="155.0" text="Notification" />
          </children>
       </FlowPane>
    </center>
