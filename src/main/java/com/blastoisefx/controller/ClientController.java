@@ -76,7 +76,7 @@ public class ClientController implements Initializable {
 
           machineType.addQueueItem(new QueueItem(
               user,
-              new Payment(price, paymentPart(paymentMethod)),
+              new Payment(price, paymentPart(price, paymentMethod)),
               duration));
         } catch (NoSuchElementException e) {
           // Ignore as user clicks cancel
@@ -103,27 +103,25 @@ public class ClientController implements Initializable {
     return result.get();
   }
 
-  private Method paymentPart(Method method) {
+  private Method paymentPart(double price, Method method) {
     Alert alert = new Alert(AlertType.CONFIRMATION);
     alert.setTitle("Payment");
     alert.setHeaderText("Confirm your payment");
-    totalPrice = new Label("Mock Price here");
+    totalPrice = new Label(String.format("RM %.2f", price));
     GridPane gridPane = new GridPane();
     gridPane.setVgap(5);
-    gridPane.add(totalPrice, 0, 0);
-
     if (method == Method.ONLINE_BANKING) {
       gridPane.add(new Label("User Name"), 0, 1);
       gridPane.add(new TextField(), 1, 1);
       gridPane.add(new Label("User Password"), 0, 2);
       gridPane.add(new PasswordField(), 1, 2);
-      gridPane.add(totalPrice, 0, 0);
     } else {
       gridPane.add(new Label("Phone Number"), 0, 1);
       gridPane.add(new TextField(), 1, 1);
       gridPane.add(new Label("PIN number"), 0, 2);
       gridPane.add(new PasswordField(), 1, 2);
     }
+    gridPane.add(totalPrice, 0, 0);
     alert.getDialogPane().setContent(gridPane);
     alert.showAndWait();
     return method;
