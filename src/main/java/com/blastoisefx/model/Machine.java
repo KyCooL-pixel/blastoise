@@ -29,10 +29,10 @@ public abstract class Machine {
     return status;
   }
 
-  public void checkQueue(LocalDateTime currentTime) {
+  public QueueItem checkQueue(LocalDateTime currentTime) {
     if (queue.size() < 1) {
       setStatus(Status.IDLE);
-      return;
+      return null;
     }
 
     QueueItem item = queue.get(0);
@@ -41,14 +41,16 @@ public abstract class Machine {
         setStatus(Status.IDLE);
         item.setState(State.FINISHED);
         queue.remove(0);
-        return;
+        return item;
       }
     }
 
     if (item.getState() == State.WAITING) {
       item.setState(State.OPERATING);
       setStatus(Status.OPERATING);
+      return null;
     }
+    return null;
   }
 
   public void addToQueue(QueueItem item) {

@@ -19,6 +19,7 @@ import com.blastoisefx.model.MachineType;
 import com.blastoisefx.model.QueueItem;
 import com.blastoisefx.model.Machine;
 import com.blastoisefx.model.Washer;
+import com.blastoisefx.controller.ClientController;
 import com.blastoisefx.model.Dryer;
 import com.blastoisefx.model.Iron;
 import com.blastoisefx.model.User;
@@ -33,7 +34,7 @@ public class App extends Application {
     private static User currUser;
 
     private static ArrayList<MachineType<? extends Machine>> machineTypes;
-    // UI
+    private static ArrayList<ClientController> clientControllers;
     private static Scene scene;
     private static Stage _stage;
 
@@ -70,6 +71,9 @@ public class App extends Application {
         machineTypes.get(0).addQueueItem(new QueueItem(user, null, 10));
         machineTypes.get(0).addQueueItem(new QueueItem(user, null, 10));
         machineTypes.get(0).addQueueItem(new QueueItem(user, null, 10));
+        
+        // store clientcontrollers
+        clientControllers = new ArrayList<>();
     }
 
     @Override
@@ -151,6 +155,10 @@ public class App extends Application {
 
     public static void setCurrUser(User cu) {
         currUser = cu;
+    }
+
+    public static ArrayList<ClientController> getClientControllers(){
+        return clientControllers;
     }
 
 }

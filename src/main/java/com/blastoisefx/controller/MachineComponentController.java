@@ -4,6 +4,7 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
+import com.blastoisefx.App;
 import com.blastoisefx.model.Machine;
 import com.blastoisefx.model.QueueItem;
 
@@ -66,7 +67,13 @@ public class MachineComponentController implements Initializable {
   }
 
   public void tick(LocalDateTime currentTime){
-    machine.checkQueue(currentTime);
+    QueueItem q = machine.checkQueue(currentTime);
+    if(q!=null){
+      for(ClientController c: App.getClientControllers()){
+      if(c.getUser() == q.getUser())
+        c.showMessage("testing","testing","completed");
+      }
+    };
     queueListView.refresh();
   }
 }

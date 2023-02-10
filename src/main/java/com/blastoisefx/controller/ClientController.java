@@ -10,6 +10,7 @@ import com.blastoisefx.model.Payment;
 import com.blastoisefx.model.User;
 import com.blastoisefx.model.Washer;
 import com.blastoisefx.model.Payment.Method;
+import com.blastoisefx.utils.Message;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -49,6 +50,10 @@ public class ClientController implements Initializable {
 
   public void setUser(User user) {
     this.user = user;
+  }
+
+  public User getUser(){
+    return user;
   }
 
   @Override
@@ -97,6 +102,10 @@ public class ClientController implements Initializable {
       result = dialog.showAndWait();
     }
     return Double.parseDouble(result.get());
+  }
+
+  public void showMessage(String head, String body, String text){
+    Message.showMessage(head,body,text);
   }
 
 }
