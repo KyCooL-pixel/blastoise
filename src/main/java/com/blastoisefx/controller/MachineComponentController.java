@@ -51,13 +51,13 @@ public class MachineComponentController implements Initializable {
       @Override
       protected void updateItem(QueueItem item, boolean empty) {
         super.updateItem(item, empty);
-        if (empty || item == null || item.getUser() == null || item.getEndTime() == null) {
+        if (empty || item == null || item.getUser() == null || item.getOperationEndTime() == null) {
           userEmailLabel.setText(null);
           endTimeLabel.setText(null);
           setGraphic(null);
         } else {
           userEmailLabel.setText(item.getUser().getEmail());
-          endTimeLabel.setText(String.valueOf(item.getWaitingTime()));
+          endTimeLabel.setText(String.valueOf(machine.getQueueItemWaitingTime(getIndex())));
           setGraphic(layout);
         }
       }

@@ -10,8 +10,8 @@ public class Dryer extends Machine {
   }
 
   public Dryer(String id) {
-      super(id);
-      this.temperature = Temperature.LOW;
+    super(id, 5);
+    this.temperature = Temperature.LOW;
   }
 
   public Temperature getTemperature() {

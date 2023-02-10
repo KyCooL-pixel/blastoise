@@ -90,11 +90,7 @@ public class QueueController implements Initializable {
     }
 
     public void addWasherQueue(User user, Payment payment, int duration) {
-        App.getMachineTypes().get(0).addQueueItem(new QueueItem(user, payment, calculateCurrentItemDuration(duration)));;
+        App.getMachineTypes().get(0).addQueueItem(new QueueItem(user, payment, duration));
     }
 
-    public int calculateCurrentItemDuration(int duration){
-        Machine availableMachine = App.getMachineTypes().get(0).getFastestAvailableMachine();
-        return (availableMachine.getQueue().size() > 0) ? (int) (availableMachine.getQueue().get(availableMachine.getQueue().size()-1).getWaitingTime() + duration) :duration;
-    }
 }
