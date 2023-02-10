@@ -78,11 +78,11 @@ public class QueueController implements Initializable {
     private void addClient() throws IOException {
         Stage clientStage = new Stage();
         FXMLLoader loader = App.getFXMLLoader("auth");
-        
-        ClientController clientController = new ClientController(this, null);
+
+        ClientController clientController = new ClientController();
         clientController.setStage(clientStage);
         App.getClientControllers().add(clientController);
-        
+
         loader.setController(new AuthController(clientController));
         Scene main = new Scene(loader.load(), 334, 400);
         clientStage.setScene(main);

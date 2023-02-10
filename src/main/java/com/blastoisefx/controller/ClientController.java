@@ -51,10 +51,6 @@ public class ClientController implements Initializable {
 
   private User user;
 
-  public ClientController(QueueController queueController, User user) {
-    this.user = user;
-  }
-
   public void setUser(User user) {
     this.user = user;
   }
