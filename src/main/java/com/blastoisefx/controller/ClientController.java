@@ -58,9 +58,9 @@ public class ClientController implements Initializable {
 
   @FXML
   void addWasherQueue(ActionEvent event) throws IOException {
-    FXMLLoader loader = App.getFXMLLoader("payment");
-    Scene paymentScene = new Scene(loader.load(), 335, 600);
-    stage.setScene(paymentScene);
+    // FXMLLoader loader = App.getFXMLLoader("payment");
+    // Scene paymentScene = new Scene(loader.load(), 335, 600);
+    // stage.setScene(paymentScene);
 
     var duration = getDuration();
     var price = duration * 123123;
