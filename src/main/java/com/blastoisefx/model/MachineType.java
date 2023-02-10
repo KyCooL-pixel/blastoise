@@ -43,7 +43,7 @@ public class MachineType<T extends Machine> {
         return machines;
     }
 
-    public Machine getFastestAvailableMachine() {
+    private Machine getFastestAvailableMachine() {
         Machine fastestMachine = null;
         LocalDateTime fastestTime = LocalDateTime.MAX;
         for (T machine : machines) {
@@ -65,5 +65,13 @@ public class MachineType<T extends Machine> {
 
     public double getAddOnPrice() {
       return ADD_ON_PRICE;
+    }
+
+    public int getDefaultDuration() {
+      return MINIMUM_DURATION;
+    }
+
+    public int getAddOnDuration() {
+        return ADD_ON_DURATION_DIVISION;
     }
 }
