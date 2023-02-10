@@ -15,6 +15,7 @@ public abstract class Machine {
     IDLE,
     OPERATING,
     LOCKED,
+    WAITING,
   }
 
   private Status status;
@@ -45,9 +46,10 @@ public abstract class Machine {
       return item;
     }
 
-    if(status == Status.LOCKED && currentTime.isAfter(item.getOperationEndTime().plusSeconds(lockDuration))) {
+    if(currentTime.isAfter(item.getOperationEndTime().plusSeconds(lockDuration))) {
       setStatus(Status.IDLE);
       item.setState(State.FINISHED);
+      item.getUser().getQueue().remove(item);
       return queue.remove(item) ? item : null;
     }
 
@@ -63,6 +65,7 @@ public abstract class Machine {
   public void addToQueue(QueueItem item) {
     item.setStartTime(getEndTime());
     queue.add(item);
+    item.getUser().getQueue().add(item);
   }
 
   public ObservableList<QueueItem> getQueue() {
