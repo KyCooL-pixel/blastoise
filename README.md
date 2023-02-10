@@ -15,7 +15,8 @@ The 'add client' button will emulate a phone from user's perspective, they can a
     - assginment algorithm in machine types need to be changed
     - add a datetime picker in client
 7. Add a screen to client to view machine status and lock/unlock it.
-8. Fix client Auth screen ratio size issue
+8. Fix client Auth screen ratio size issue\
+9. Notification page (for report purpose)
 
 ## A queueItem will terminate when
 1) Wash completed && idle for a period of time

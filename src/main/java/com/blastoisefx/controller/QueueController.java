@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import com.blastoisefx.App;
+import com.blastoisefx.model.Machine;
 import com.blastoisefx.model.Payment;
 import com.blastoisefx.model.QueueItem;
 import com.blastoisefx.model.User;
@@ -78,6 +79,7 @@ public class QueueController implements Initializable {
         Stage clientStage = new Stage();
         FXMLLoader loader = App.getFXMLLoader("auth");
         ClientController clientController = new ClientController(this, null);
+        clientController.setStage(clientStage);
 
         loader.setController(new AuthController(clientController));
         Scene main = new Scene(loader.load(), 335, 600);
@@ -86,7 +88,12 @@ public class QueueController implements Initializable {
     }
 
     public void addWasherQueue(User user, Payment payment, int duration) {
-        App.getMachineTypes().get(0).addQueueItem(new QueueItem(user, payment, duration));;
+        App.getMachineTypes().get(0).addQueueItem(new QueueItem(user, payment, calculateCurrentItemDuration(duration)));;
+    }
+
+    public int calculateCurrentItemDuration(int duration){
+        Machine availableMachine = App.getMachineTypes().get(0).getFastestAvailableMachine();
+        return (availableMachine.getQueue().size() > 0) ? (int) (availableMachine.getQueue().get(availableMachine.getQueue().size()-1).getWaitingTime() + duration) :duration;
     }
 
 
