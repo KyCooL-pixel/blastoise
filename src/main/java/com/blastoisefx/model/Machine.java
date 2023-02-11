@@ -84,6 +84,11 @@ public abstract class Machine {
     return queue.get(queue.size() - 1).getOperationEndTime();
   }
 
+  public long getQueueItemWaitingTime(QueueItem item) {
+    var index = queue.indexOf(item);
+    return getQueueItemWaitingTime(index);
+  }
+
   public long getQueueItemWaitingTime(int index) {
     if (index < 0 || index >= queue.size()) {
       throw new IndexOutOfBoundsException();
