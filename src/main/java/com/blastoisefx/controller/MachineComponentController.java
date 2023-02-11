@@ -55,10 +55,16 @@ public class MachineComponentController implements Initializable {
           endTimeLabel.setText(null);
           setGraphic(null);
         } else {
-          layout.setStyle(null);
-          if(getIndex() == 0 && machine.getStatus() == Machine.Status.LOCKED) {
-            layout.setStyle("-fx-background-color: #ffcbd1");
+          if (getIndex() == 0) {
+            if (machine.getStatus() == Machine.Status.LOCKED) {
+              layout.setStyle("-fx-background-color: #ffcbd1");
+            } else if (machine.getStatus() == Machine.Status.WAITING) {
+              layout.setStyle("-fx-background-color: #BBE2FF");
+            } else {
+              layout.setStyle(null);
+            }
           }
+
           userEmailLabel.setText(item.getUser().getEmail());
           var endTime = machine.getQueueItemWaitingTime(getIndex());
           endTimeLabel.setText(String.valueOf(endTime < 0 ? 0 : endTime));

@@ -1,6 +1,7 @@
 package com.blastoisefx.controller;
 
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
@@ -9,6 +10,10 @@ import com.blastoisefx.model.Machine;
 import com.blastoisefx.model.QueueItem;
 import com.blastoisefx.model.User;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -99,38 +104,59 @@ public class ClientViewMachinesController implements Initializable {
 
       lockButton.setDisable(false);
       if (machine.getStatus() == Machine.Status.WAITING) {
-        lockButton.setText("Unlock");
-      } else if (machine.getStatus() == Machine.Status.LOCKED) {
         lockButton.setText("Lock");
+      } else if (machine.getStatus() == Machine.Status.LOCKED) {
+        lockButton.setText("Unlock");
       } else {
         lockButton.setDisable(true);
       }
     });
     queuesListView.setItems(user.getQueue());
     queuesListView.setCellFactory(param -> new ListCell<QueueItem>() {
-      private final Label userEmailLabel = new Label();
+      private final Label machineLabel = new Label();
       private final Label endTimeLabel = new Label();
-      private final AnchorPane layout = new AnchorPane(userEmailLabel, endTimeLabel);
+      private final AnchorPane layout = new AnchorPane(machineLabel, endTimeLabel);
 
       {
-        AnchorPane.setLeftAnchor(userEmailLabel, 2.0);
+        AnchorPane.setLeftAnchor(machineLabel, 2.0);
         AnchorPane.setRightAnchor(endTimeLabel, 2.0);
       }
 
       @Override
       protected void updateItem(QueueItem item, boolean empty) {
         super.updateItem(item, empty);
+        var machine = queueItemToMachine.get(item);
+
         if (empty || item == null || item.getUser() == null || item.getOperationEndTime() == null) {
-          userEmailLabel.setText(null);
+          machineLabel.setText(null);
           endTimeLabel.setText(null);
           setGraphic(null);
         } else {
-          userEmailLabel.setText("halo");
-          endTimeLabel.setText(item.getOperationEndTime().toString());
+          if (item.getState() == QueueItem.State.FINISHED) {
+            if (machine != null && machine.getStatus() == Machine.Status.LOCKED) {
+              layout.setStyle("-fx-background-color: #ffcbd1");
+            } else if (machine != null && machine.getStatus() == Machine.Status.WAITING) {
+              layout.setStyle("-fx-background-color: #BBE2FF");
+            } else {
+              layout.setStyle(null);
+            }
+          }
+
+          machineLabel.setText(machine.getClass().getSimpleName() + " " + machine.getId());
+          endTimeLabel.setText(String.valueOf(machine.getQueueItemWaitingTime(item)));
           setGraphic(layout);
         }
       }
     });
+
+    final Timeline time = new Timeline(
+        new KeyFrame(
+            Duration.seconds(1),
+            event -> {
+              tick();
+            }));
+    time.setCycleCount(Animation.INDEFINITE);
+    time.play();
   }
 
   public void tick() {
