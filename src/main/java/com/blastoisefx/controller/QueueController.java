@@ -27,8 +27,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class QueueController implements Initializable {
-    final double MILLISECONDS_PER_FRAME_IN_30_FPS = Math.ceil(1000 / 30);
-
     // normal fxml stuff
     // @FXML
     // private Label countDownLabel;
@@ -61,7 +59,7 @@ public class QueueController implements Initializable {
 
         final Timeline time = new Timeline(
                 new KeyFrame(
-                        Duration.millis(MILLISECONDS_PER_FRAME_IN_30_FPS),
+                        Duration.millis(App.MILLISECONDS_PER_FRAME_IN_30_FPS),
                         event -> {
                             setCurrentTime();
                             queueComponentControllers.forEach(QueueComponentController::tick);

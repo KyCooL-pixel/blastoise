@@ -38,6 +38,8 @@ public class App extends Application {
     private static Scene scene;
     private static Stage _stage;
 
+    public static final double MILLISECONDS_PER_FRAME_IN_30_FPS = Math.ceil(1000 / (double) 33);
+
     @Override
     public void init() {
         loadUsers();
@@ -46,7 +48,7 @@ public class App extends Application {
         final int NUMBER_OF_DRYERS = 2;
         final int NUMBER_OF_IRONS = 2;
 
-        //Initiate machines
+        // Initiate machines
         ArrayList<Washer> washers = new ArrayList<>();
         ArrayList<Dryer> dryers = new ArrayList<>();
         ArrayList<Iron> irons = new ArrayList<>();
@@ -61,7 +63,7 @@ public class App extends Application {
             irons.add(new Iron(String.valueOf(i)));
         }
 
-        //Initiate machine types
+        // Initiate machine types
         machineTypes = new ArrayList<>();
         machineTypes.add(new MachineType<Washer>(washers, 3, 1, 30, 10));
         machineTypes.add(new MachineType<Dryer>(dryers, 5, 2, 30, 12));
@@ -71,7 +73,7 @@ public class App extends Application {
         machineTypes.get(0).addQueueItem(new QueueItem(user, null, 10));
         machineTypes.get(0).addQueueItem(new QueueItem(user, null, 10));
         machineTypes.get(0).addQueueItem(new QueueItem(user, null, 10));
-        
+
         // store clientcontrollers
         clientControllers = new ArrayList<>();
     }
@@ -132,7 +134,6 @@ public class App extends Application {
         window.setHeight(height);
     }
 
-
     public static FXMLLoader getFXMLLoader(String fxml) {
         return new FXMLLoader(App.class.getResource(fxml + ".fxml"));
     }
@@ -158,7 +159,7 @@ public class App extends Application {
         currUser = cu;
     }
 
-    public static ArrayList<ClientController> getClientControllers(){
+    public static ArrayList<ClientController> getClientControllers() {
         return clientControllers;
     }
 
